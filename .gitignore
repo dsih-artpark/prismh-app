@@ -1,8 +1,8 @@
 /node_modules
-/public
-/uploads
+# /public
+# /uploads
 /storage/*.key
-
+/vendor
 .env
 .env.backup
 .phpunit.result.cache
