@@ -357,40 +357,7 @@ class User extends Controller
         
         return view('includes.user.details', compact('datadetail')); 
    
-    }
-
-    public function mail_test(){
-      $postfields = '{
-                      "personalizations": [{
-                        "to": [{
-                          "email": "dheerajzxx@gmail.com"
-                        }]
-                      }],
-                      "from": {
-                        "email": "delegate@biffes.org"
-                      },
-                      "subject": "Sending with SendGrid is Fun",
-                      "content": [{
-                        "type": "text/plain", 
-                        "value": "and easy to do anywhere, even with cURL"
-                      }]
-                    }';
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/v3/mail/send');
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-      curl_setopt($ch, CURLOPT_HTTPHEADER, [
-          'Authorization: Bearer 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',
-          'Content-Type: application/json',
-      ]);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
-  
-      $response = curl_exec($ch);
-  
-      curl_close($ch);
-      dd($response);
-    }
-    
+    }    
     
     
 }

@@ -67,6 +67,13 @@
 
 <body class="theme-light" data-highlight="grass">
 
+    <div class="position-absolute" style="z-index:10;right:75px;top:5px;">
+      <select class="form-control p-0 px-2 m-0" id="" onchange="window.location.href=this.value">
+        <option value="{{ route('changeLang') }}?lang=en" {{app()->getLocale() == 'en' ? 'selected' : ''}}>EN</option>
+        <option value="{{ route('changeLang') }}?lang=ka" {{app()->getLocale() == 'ka' ? 'selected' : ''}}>KN</option>
+      </select>
+    </div>
+
     <div id="preloader"><div class="spinner-border color-highlight" role="status">
         
     </div></div>
@@ -75,7 +82,6 @@
 
     <div id="page">
         @section('header')
-
         <div class="header header-fixed header-auto-show header-logo-app">
             <a href="{{route('login.dashboard')}}" class="header-title">{{ __('messages.Pojecttitle') }}</a>
         </div>
@@ -88,15 +94,15 @@
            <!-- </a>-->
            <a href="{{ route('login.surveys.list') }}" class="<?= (Route::currentRouteName()== 'login.surveys.list') || (Route::currentRouteName()== 'login.pick') || (Route::currentRouteName() == 'login.history.detail') ||  (Route::currentRouteName()== 'login.source-reduction.id') ? 'active-nav': '' ;?>">
                 <i data-feather="heart" data-feather-line="1" data-feather-size="21" data-feather-color="green-dark" data-feather-bg="green-fade-light"></i>
-                <span>Larva Surveys</span>
+                <span>{{__('messages.Larva Survey')}}</span>
             </a>
             <a href="{{ route('login.dashboard') }}" class="<?= (Route::currentRouteName()== 'login.dashboard') || (Route::currentRouteName()== 'login.events') || (Route::currentRouteName()== 'login.events.detail')  || (Route::currentRouteName()== 'login.news') || (Route::currentRouteName()== 'login.survey-patient') || (Route::currentRouteName()== 'login.gallery') || (Route::currentRouteName()== 'login.support') || (Route::currentRouteName()== 'login.profile')  ? 'active-nav': '' ;?>">
                 <i data-feather="settings" data-feather-line="1" data-feather-size="21" data-feather-color="brown-dark" data-feather-bg="brown-fade-light"></i>
-                <span>Dashboard</span>
+                <span>{{__('messages.Dashboard')}}</span>
             </a>
            <a href="{{ route('login.dump.list')}}" class="<?= (Route::currentRouteName()== 'login.dump') || (Route::currentRouteName() == 'login.verify')|| (Route::currentRouteName() == 'login.dump.id') || (Route::currentRouteName() == 'login.dump.list') ? 'active-nav': '' ;?>">
                 <i data-feather="file" data-feather-line="1" data-feather-size="21" data-feather-color="red-dark" data-feather-bg="red-fade-light"></i>
-                <span>Breeding Spots</span>
+                <span>{{__('messages.Breeding Spots')}}</span>
             </a>
             <!--<a href="{{ route('login.profile')}}" class="<?= (Route::currentRouteName()== 'dashboard') || (Route::currentRouteName()== 'login.profile') || (Route::currentRouteName()== 'checkstatus') || (Route::currentRouteName()== 'verifymobile') ? 'active-nav': '' ;?>"> -->
             <!--    <i data-feather="home" data-feather-line="1" data-feather-size="21" data-feather-color="blue-dark" data-feather-bg="blue-fade-light"></i>-->

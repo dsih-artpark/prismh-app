@@ -11,7 +11,7 @@
 @section('content')
 
 <div class="page-title page-title-small">
-    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>Details</h2>
+    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>{{__('messages.details')}}</h2>
       <!--<a class=" float-end lan-btn btn changeLang" id="{{ __('messages.langid') }}" href="#" ><span>{{ __('messages.lang') }}</span></a>-->
             @if(Auth::guard('customer')->user()->profile)
       <a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img" data-src="{{asset('uploads/customer')}}/{{Auth::guard('customer')->user()->profile}}"></a>
@@ -43,13 +43,13 @@
 <div class="card-overlay "></div>
 </div>
 <div class="content mb-0">
-    <h1 class="text-center">Larva Survey Details</h1>
+    <h1 class="text-center">{{__('messages.Larva Survey details')}}</h1>
     <div class="divider mb-0"></div>
 <div class="p-2">
 <span class="">{{$datadetails->uid}}</span><br>
 <span class="">{{$datadetails->latit}}</span><br>
 @if($datadetails->q1)
-<span class="">Does breading spot exist ? {{$datadetails->q1}}</span>
+<span class="">{{__('messages.Does Breeding Spots Exist')}} ? {{$datadetails->q1}}</span>
 @endif
 @if($datadetails->q1 == "Yes")
 - <span class="">{{$datadetails->waste}}</span><br>
@@ -111,10 +111,10 @@
 <!--<div class="card-overlay "></div>-->
 <!--</div>-->
 <div class="content mb-0">
-    <h1 class="text-center">Source Reduction Details</h1>
+    <h1 class="text-center">{{__('messages.Source reduction details')}}</h1>
     <div class="divider mb-0"></div>
 <div class="p-2">
-<span class="">Source Reduction : {{$datadetails->source_reduction}}</span><br>
+<span class="">{{__('messages.Source Reduction')}} : {{$datadetails->source_reduction}}</span><br>
 
 
    

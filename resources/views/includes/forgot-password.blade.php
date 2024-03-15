@@ -25,7 +25,7 @@
 @section('content')
 
         <div class="page-title page-title-small ">
-            <h2><a href="#" data-back-button=""><i class="fa fa-arrow-left"></i></a> Forgot Password</h2>
+            <h2><a href="#" data-back-button=""><i class="fa fa-arrow-left"></i></a> {{ __('messages.Forgot password') }}</h2>
         </div>
         
         <div class="card header-card shape-rounded" data-card-height="150">
@@ -49,14 +49,14 @@
                     @csrf
                     
                     <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4">
-                <input type="number" class="form-control validate-text phone" id="phone" placeholder="{{ __('messages.regform23') }}" name="phone" required>
-                <label for="phone" class="color-highlight">{{ __('messages.regform2') }}*</label>
+                <input type="number" class="form-control validate-text phone" id="phone" placeholder="{{ __('messages.Mobile') }}" name="phone" required>
+                <label for="phone" class="color-highlight">{{ __('messages.Mobile') }}*</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
             </div>
             
                 <center>
-                     <input type="submit" class="btn btn-m mt-4 mb-4 btn-full bg-green-dark rounded-sm text-uppercase font-900" value="Submit">
+                     <input type="submit" class="btn btn-m mt-4 mb-4 btn-full bg-green-dark rounded-sm text-uppercase font-900" value="{{ __('messages.Submit') }}">
                     
                 </center>
                 

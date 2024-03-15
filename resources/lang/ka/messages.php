@@ -3,7 +3,7 @@
 return [
     
     'company' => 'ಮೆಕ್ವೇರ್ ಟೆಕ್ನಾಲಜೀಸ್',
-    
+    "copyrightservice"=>"BBMP",
     //menus
     'menu1' => 'ವಿಬಿಎಫ್',
     'menu2' => 'ಮುಖಪುಟ',
@@ -17,6 +17,7 @@ return [
     
     //project name
     'Pojecttitle' => 'ಸಿ ಡಿ ಡಬ್ಲ್ಯೂ ಎಂ ಎಸ್',
+    'Pojecttitlefull' => 'ಪ್ರಿಸ್ಮ್-ಎಚ್',
     
     //footer
     'copyright' => 'ನಕಲುಹಕ್ಕು',
@@ -143,6 +144,76 @@ return [
 //Memebers Details
 
 'memdethead' => 'ಸದಸ್ಯರ ವಿವರಗಳು',
+
+"adminModule1" => "Dashboard",
+
+// Registration Page
+"Registration" => "ನೋಂದಣಿ",
+"Name" => "ಹೆಸರು",
+"Enter the name" => "ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+"Required" => "ಅಗತ್ಯವಿದೆ",
+"Mobile" => "ಮೊಬೈಲ್",
+"Enter the mobile number" => "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+"Email" => "ಇಮೇಲ್",
+"Enter the email" => "ಇಮೇಲ್ ನಮೂದಿಸಿ",
+"Select Role" => "ಪಾತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+"Ward" => "ವಾರ್ಡ್",
+"ID card" => "ಗುರುತಿನ ಚೀಟಿ",
+"Password" => "ಸಂಕೇತ ಪದ",
+"Confirm Password" => "ಪಾಸ್ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+"Submit" => "ಸಲ್ಲಿಸು",
+
+// Forgot Password
+"Forgot password" => "ಸಂಕೇತ ಪದ ಮರೆತಿರಾ",
+
+// Footer
+"footer1" => "ಯಾವುದೇ ತಾಂತ್ರಿಕ ಬೆಂಬಲಕ್ಕಾಗಿ ದಯವಿಟ್ಟು ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ",
+"footer2" => "ಮೇಲಾಗಿ WhatsApp ಸಂದೇಶ",
+
+// Dashboard
+"Dashboard"=>"ಡ್ಯಾಶ್ಬೋರ್ಡ್",
+"Total larva survey"=>"ಒಟ್ಟು ಲಾರ್ವಾ ಸಮೀಕ್ಷೆ",
+"Todays larva survey"=>"ಇಂದಿನ ಲಾರ್ವಾ ಸಮೀಕ್ಷೆ",
+"Larva Survey"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆ",
+"Fever Survey"=>"ಜ್ವರದ ಸಮೀಕ್ಷೆ",
+"Breeding Spots"=>"ಸಂತಾನೋತ್ಪತ್ತಿ ತಾಣಗಳು",
+
+// Survey add
+"Reporter Name"=>"ವರದಿಗಾರನ ಹೆಸರು",
+"LatLong"=>"ಅಕ್ಷಾಂಶ /ರೇಖಾಂಶ",
+"Does Breeding Spots Exist"=>"ಸಂತಾನೋತ್ಪತ್ತಿ ತಾಣಗಳು ಅಸ್ತಿತ್ವದಲ್ಲಿವೆಯೇ",
+"Yes"=>"ಹೌದು",
+"No"=>"ಇಲ್ಲ",
+"Type of Container"=>"ಕಂಟೇನರ್ ಮಾದರಿ",
+"Remarks"=>"ಅಭಿಪ್ರಾಯ",
+"Enter your remarks"=>"ನಿಮ್ಮ ಅಭಿಪ್ರಾಯಗಳನ್ನು ನಮೂದಿಸಿ",
+"Upload images"=>"ಚಿತ್ರಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+"Source Reduction"=>"ಮೂಲ ಕಡಿತ",
+"Done"=>"ಆಗಿದೆ",
+"Not done"=>"ಆಗಿಲ್ಲ",
+"Indoor"=>"ಒಳಾಂಗಣ",
+"Outdoor"=>"ಹೊರಾಂಗಣ",
+"Indoor of the house" => "ಓಳಾಂಗಣದಲ್ಲಿ ಹುಡುಕುವ ತಾಣಗಳು",
+"Cement tank"=>"ಸಿಮೆಂಟ್ ಟ್ಯಾಂಕ್",
+"Byarrel drums"=>"ಪ್ಲಾಸ್ಟಿಕ್ ಬ್ಯಾರಲ್",
+"Refrigerators"=>"ರೆಪ್ರಿಜಿರೆಟರ್",
+"Others"=>"ಇತರೆ",
+"Outdoor of the house"=>"ಹೋರಾಂಗಣದಲ್ಲಿ ಹುಡುಕುವ ತಾಣಗಳು",
+"Plastic Drums"=>"ಪ್ಲಾಸ್ಟಿಕ್ ಟ್ಯಾಂಕ್ /ಡ್ರಮ್ಸ್",
+"Cement Sumps"=>"ಸಿಮೆಂಟ್ ಟ್ಯಾಂಕ್/ಸಂಪ್ಸ್",
+"Flower pots"=>"ಹೂವಿನ ಕುಂಡಗಳು",
+"Tyres"=>"ಟಯರ್",
+"Other solid wastes"=>"ಇತರ ಘನತ್ಯಾಜ್ಯ",
+"List of Larva survey"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆಯ ಪಟ್ಟಿ",
+"Time"=>"ಸಮಯ",
+"Date"=>"ದಿನಾಂಕ",
+"Larva Survey details"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆಯ ವಿವರಗಳು",
+"Source reduction details"=>"ಮೂಲ ಕಡಿತದ ವಿವರಗಳು",
+"Enter the password"=>"ಸಂಕೇತ ಪದವನ್ನು ನಮೂದಿಸಿ",
+"Enter the confirm password"=>"ದೃಢೀಕರಣ ಸಂಕೇತ ಪದವನ್ನು ನಮೂದಿಸಿ",
+"Please Select"=>"ಆಯ್ಕೆ ಮಾಡಿ",
+
+
 
 
 ];

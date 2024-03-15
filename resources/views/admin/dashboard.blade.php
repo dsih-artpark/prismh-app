@@ -201,17 +201,14 @@ $monthlyCount = DB::table('pick')
               <div class="col-xl-8 col-md-8 box-col-8">
                 <div class="card" style=" box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;">
                   <div class="chart-widget-top">
-                    <div class="card-body p-1">
-                      <div class="row">   
-                      <div> 
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31105.88030556827!2d77.54462225!3d12.956806499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1685962388351!5m2!1sen!2sin" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                      </div>
+                    <div class="card-body p-2" style="min-height:324px;">
+                      <div id="map" style="min-height:310px;border-radius: 15px">
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-             
+
               <div class="col-xl-4 col-sm-4 box-col-4">
                 <div class="card " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;">
                   <div class="card-header pb-0">
@@ -440,4 +437,50 @@ $monthlyCount = DB::table('pick')
 
      });
   </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzhEbRtsoayqY94uOYInJIPCJp5Y6e7cY&callback=initMap&libraries=&v=weekly" async> </script>
+
+<script>
+  function initMap() {
+    // var locations = [
+    //   [12.972442, 77.58064],
+    //   [12.972442, 77.58064],
+    // ];
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: new google.maps.LatLng(12.972442, 77.580643),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });    
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;   
+    const green_marker =  "http://maps.google.com/mapfiles/ms/micons/green-dot.png";
+    // for (i = 0; i < locations.length; i++) {  
+      @foreach($locations as $location)
+        @if($location->latit)        
+          @if($location->source_reduction == 'Done')
+            marker = new google.maps.Marker({
+              // position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+              position: new google.maps.LatLng({{explode(',', $location->latit)[0]}}, {{explode(',', $location->latit)[1]}}),
+              map: map,
+              icon: green_marker
+            });
+          @else
+            marker = new google.maps.Marker({
+              // position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+              position: new google.maps.LatLng({{explode(',', $location->latit)[0]}}, {{explode(',', $location->latit)[1]}}),
+              map: map,
+            });
+          @endif
+          // google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          //   return function() {
+          //     infowindow.setContent(locations[i][0]);
+          //     infowindow.open(map, marker);
+          //   }
+          // })(marker, i));
+        @endif
+      @endforeach
+    // }
+  }
+</script>
 @endsection

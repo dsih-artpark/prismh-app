@@ -5,38 +5,38 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <style>
-label.color-highlight.profess-tag {
-    opacity: 1;
-    left: 23px !important;
-    transform: translateX(-14px) !important;
-    margin-left: 0px !important;
-    position: absolute;
-    font-size: 12px;
-    transition: all 250ms ease;
-    background-color: #FFF;
-    z-index: 996;
-    top: -11px;
-    padding: 0px 5px;
-}
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    top: 12px;
-    right: 4px;
-   
-}
-span.select2-selection.select2-selection--multiple {
-    height: 53px !important;
-    border-left-width: 1px !important;
-    border-right-width: 1px !important;
-    border-top-width: 1px !important;
-    padding-left: 6px !important;
-    padding-right: 10px !important;
-    border-radius: 10px !important;
-    padding-top: 8px !important;
-    border-color: rgba(0, 0, 0, 0.08) !important;
-}
-span.select2-selection.select2-selection--multiple {
-    height: 55px !important;
-}
+  label.color-highlight.profess-tag {
+      opacity: 1;
+      left: 23px !important;
+      transform: translateX(-14px) !important;
+      margin-left: 0px !important;
+      position: absolute;
+      font-size: 12px;
+      transition: all 250ms ease;
+      background-color: #FFF;
+      z-index: 996;
+      top: -11px;
+      padding: 0px 5px;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+      top: 12px;
+      right: 4px;
+    
+  }
+  span.select2-selection.select2-selection--multiple {
+      height: 53px !important;
+      border-left-width: 1px !important;
+      border-right-width: 1px !important;
+      border-top-width: 1px !important;
+      padding-left: 6px !important;
+      padding-right: 10px !important;
+      border-radius: 10px !important;
+      padding-top: 8px !important;
+      border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+  span.select2-selection.select2-selection--multiple {
+      height: 55px !important;
+  }
 
     .header{
         display:none;
@@ -63,7 +63,7 @@ span.select2-selection.select2-selection--multiple {
 
         <div class="page-title page-title-small">
             <div class="text-center">
-                <h2>Registration</h2>
+                <h2>{{ __('messages.Registration') }}</h2>
         </div>
             <!--<a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img" data-src="{{url('public/images/avatars/5s.png') }}"></a>-->
         </div>
@@ -87,25 +87,25 @@ span.select2-selection.select2-selection--multiple {
                     @csrf
                     
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-4">
-                <input type="name" class="form-control validate-name" id="name" placeholder="Enter the name" name="name" required>
-                <label for="name" class="color-highlight font-400 font-13">Name</label>
+                <input type="name" class="form-control validate-name" id="name" placeholder="{{ __('messages.Enter the name') }}" name="name" required>
+                <label for="name" class="color-highlight font-400 font-13">{{ __('messages.Name') }}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(Required)</em>
+                <em>({{ __('messages.Required') }})</em>
             </div>
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-4">
-                <input type="phone" class="form-control validate-name" id="phone" placeholder="Enter the phone number" name="phone" required>
-                <label for="phone" class="color-highlight font-400 font-13">Mobile</label>
+                <input type="phone" class="form-control validate-name" id="phone" placeholder="{{ __('messages.Enter the mobile number') }}" name="phone" required>
+                <label for="phone" class="color-highlight font-400 font-13">{{ __('messages.Mobile') }}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(Required)</em>
+                <em>({{ __('messages.Required') }})</em>
             </div>
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-4">
-                <input type="email" class="form-control validate-name" id="email" placeholder="Enter the email" name="email" required>
-                <label for="email" class="color-highlight font-400 font-13">Email</label>
+                <input type="email" class="form-control validate-name" id="email" placeholder="{{ __('messages.Enter the email') }}" name="email" required>
+                <label for="email" class="color-highlight font-400 font-13">{{ __('messages.Email') }}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(Required)</em>
+                <em>({{ __('messages.Required') }})</em>
             </div>
             <!--<div class="input-style input-style-always-active has-borders no-icon validate-field mb-4" style="position: relative;margin-bottom: 15px !important;">-->
             <!--    <label for="roles" class="color-highlight profess-tag">Roles</label>-->
@@ -117,41 +117,41 @@ span.select2-selection.select2-selection--multiple {
 
             <!--</div>-->
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4" style="position: relative;margin-bottom: 15px !important;">
-                <label for="ward" class="color-highlight profess-tag ">Select Role*</label>
+                <label for="ward" class="color-highlight profess-tag ">{{ __('messages.Select Role') }}*</label>
                 <select  required class="form-control profess-tag-1" id="role" name="roles" data-placeholder="Select"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
-                  <option value="" selected disabled>Select Role</option>
+                  <option value="" selected disabled>{{ __('messages.Select Role') }}</option>
                   @foreach($roles as $role)
                     <option value="{{$role->id}}">{{$role->name}}</option>
                   @endforeach
                 </select>
             </div>
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4" style="position: relative;margin-bottom: 15px !important;">
-                <label for="ward" class="color-highlight profess-tag ">Ward*</label>
+                <label for="ward" class="color-highlight profess-tag ">{{ __('messages.Ward') }}*</label>
                 <select  required class="form-control ward profess-tag-1" id="ward" name="ward" data-placeholder="Select"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
                 </select>
             </div>
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4" style="position: relative;margin-bottom: 15px !important;">
-                <label for="id_card" class="color-highlight profess-tag ">ID Card*</label>
+                <label for="id_card" class="color-highlight profess-tag ">{{ __('messages.ID card') }}*</label>
                 <input type="file" class="form-control profess-tag-1" name="id_card" id="id_card" style="border-color: rgba(0, 0, 0, 0.08) !important;">
             </div>
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-4">
-                <input type="password" class="form-control validate-name" id="password" placeholder="Enter the password" name="password" required>
-                <label for="password" class="color-highlight font-400 font-13">Password</label>
+                <input type="password" class="form-control validate-name" id="password" placeholder="{{ __('messages.Enter the password') }}" name="password" required>
+                <label for="password" class="color-highlight font-400 font-13">{{ __('messages.Password') }}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(Required)</em>
+                <em>({{ __('messages.Required') }})</em>
             </div>
             
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-4">
-                <input type="cpassword" class="form-control validate-name" id="cpassword" placeholder="Enter the confirm password" name="cpassword" required>
-                <label for="form1" class="color-highlight font-400 font-13">Confirm Password</label>
+                <input type="cpassword" class="form-control validate-name" id="cpassword" placeholder="{{ __('messages.Enter the confirm password') }}" name="cpassword" required>
+                <label for="form1" class="color-highlight font-400 font-13">{{ __('messages.Confirm Password') }}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(Required)</em>
+                <em>({{ __('messages.Required') }})</em>
                 <p id="vmessage"></p>
             </div>
             <center>
-                <input type="submit" class="btn btn-m btn-full rounded-sm shadow-l bg-green-dark text-uppercase font-700 mt-4" value="Submit">
+                <input type="submit" class="btn btn-m btn-full rounded-sm shadow-l bg-green-dark text-uppercase font-700 mt-4" value="{{ __('messages.Submit') }}">
             </center>
             
 
@@ -199,7 +199,7 @@ $.ajax({
                 else
                 {
                      $(".roles").html('');
-                    $(".roles").append("<option label='Please Select' value=''>Select any one</option>");
+                    $(".roles").append("<option label='{{ __('messages.Please Select') }}' value=''>Select any one</option>");
                     $.each(data, function(i, item)
                     {
                         $(".roles").append("<option value="+item.id+">"+item.name+"</option>");      
@@ -219,7 +219,7 @@ $.ajax({
                 }
                 else
                 {
-                    $(".ward").append("<option label='Please Select' value=''>Select</option>");
+                    $(".ward").append("<option label='{{ __('messages.Please Select') }}' value=''>Select</option>");
                     $.each(data, function(i, item)
                     {
                         $(".ward").append("<option value="+item.id+">"+item.name+"</option>");      

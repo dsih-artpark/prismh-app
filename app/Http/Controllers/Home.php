@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Http;
 use QrCode;
 
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 
 class Home extends Controller
@@ -253,10 +254,18 @@ class Home extends Controller
                 $i=1;
             foreach($files as $file)
             {
+                $dimension = getimagesize($file);
+                $x = 900;
+                $y = round($x * $dimension[1] / $dimension [0]);
+                $y = (int) $y;
                 // $image_name = date('Ymd-his').$i.'.'.$file->extension();
                 $image_name = date('Ymdhis').$i.rand(10,99).'.'.$file->extension();
                 $destinationPath = base_path('public/uploads/pick');
-                $file->move($destinationPath, $image_name);
+                // $file->move($destinationPath, $image_name);
+                $img = Image::make($file->getRealPath());
+                $img->resize($x, $y, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->resizeCanvas($x, $y)->save($destinationPath.'/'.$image_name);
                 $images[]=$image_name;
                 $i++;
                 
@@ -278,8 +287,8 @@ class Home extends Controller
         $data['created_at'] = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
         // $uid = Str::random(4, '1234567890');
         // $data['uid'] = "BBMP".$uid;
-        $uid = $this->randomAlpha(2);
-        $data['uid'] = "BBMP".date('Ymdhis').$uid;
+        // $uid = $this->randomAlpha(2);
+        $data['uid'] = (string)Str::uuid();
         $data['cust_id'] = Auth::guard('customer')->id();
        
         $result =  DB::table('pick')->insert($data);
@@ -675,7 +684,8 @@ class Home extends Controller
       $customer = DB::table('customers')->where('phone',$phone)->first();
       $res = $this->send_mail($customer->email, $otp);
       \Session::forget('error');
-      return view('includes.confirm_otp', compact('phone'));
+      $success = 'OTP sent successfully.';
+      return view('includes.confirm_otp', compact('phone','success'));
     }
     
     public function forgotpasswordstore(Request $request)

@@ -19,7 +19,7 @@
 @section('content')
 
 <div class="page-title page-title-small">
-    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>Larva Survey</h2>
+    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>{{__('messages.Larva Survey')}}</h2>
       <!--<a class=" float-end lan-btn btn changeLang" id="{{ __('messages.langid') }}" href="#" ><span>{{ __('messages.lang') }}</span></a>-->
        @if(Auth::guard('customer')->user()->profile)
       <a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img" data-src="{{asset('uploads/customer')}}/{{Auth::guard('customer')->user()->profile}}"></a>
@@ -56,26 +56,26 @@
                    
                   <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-2">
                 <input type="text" class="form-control validate-text" value="{{Auth::guard('customer')->user()->username}}"  readonly>
-                <label for="lat it" class="color-highlight ">Reporter Name</label>
+                <label for="lat it" class="color-highlight ">{{__('messages.Reporter Name')}}</label>
                 
             </div>
             
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-2">
                 <input type="text" class="form-control validate-text latit" id="latit" placeholder="Please allow Location permission" name="latit" required readonly>
-                <label for="latit" class="color-highlight ">Latitude / Longitude</label>
+                <label for="latit" class="color-highlight ">{{__('messages.LatLong')}}</label>
                 
             </div>
             
             <div class="col-12 mb-3">
 
-<span class="color-highlight">Does breeding spot exist ?</span>
+<span class="color-highlight">{{__('messages.Does Breeding Spots Exist')}} ?</span>
 <div class="fac fac-radio "><span></span>
 <input id="box1-fac-radio-q11" class="breed" type="radio" name="q1" value="Yes" >
-<label for="box1-fac-radio-q11">Yes</label>
+<label for="box1-fac-radio-q11">{{__('messages.Yes')}}</label>
 </div>
 <div class="fac fac-radio "><span></span>
 <input id="box2-fac-radio-q12" class="breed" type="radio" name="q1" value="No" checked>
-<label for="box2-fac-radio-q12">No</label>
+<label for="box2-fac-radio-q12">{{__('messages.No')}}</label>
 </div>
 
 
@@ -83,45 +83,45 @@
 <div class="breeddiv">
     
     <div class="col-md-12 input-style-always-active has-borders no-icon mb-4 " style="position: relative;margin-bottom: 15px !important;">
-                <label for="waste" class="color-highlight profess-tag">Type of Container</label>
+                <label for="waste" class="color-highlight profess-tag">{{__('messages.Type of Container')}}</label>
                 <select   class="form-select waste profess-tag-1" id="waste" name="waste" data-placeholder="{{ __('messages.regselect') }}"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
                     <option label='Please Select' value=''>Select any one</option>
-                    <option value="Indoor">Indoor</option>
-                    <option value="Outdoor">Outdoor</option>
+                    <option value="Indoor">{{__('messages.Indoor')}}</option>
+                    <option value="Outdoor">{{__('messages.Outdoor')}}</option>
                     <!--<option value="Tier">Tier</option>-->
                     <!--<option value="Others">Others</option>-->
                 </select>
 
             </div>
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4 indoordiv" style="position: relative;margin-bottom: 15px !important;">
-                <label for="waste" class="color-highlight profess-tag">Indoor of the House</label>
+                <label for="waste" class="color-highlight profess-tag">{{__('messages.Indoor of the house')}}</label>
                 <select   class="form-select indoor profess-tag-1" id="indoor" name="indoor" data-placeholder="{{ __('messages.regselect') }}"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
                     <option label='Please Select' value=''>Select any one</option>
-                    <option value="Cement Tank">Cement Tank</option>
-                    <option value="Byarrel/Plastic Drums">Byarrel/Plastic Drums</option>
-                    <option value="Refrigerators">Refrigerators</option>
-                    <option value="Others">Others</option>
+                    <option value="Cement Tank">{{__('messages.Cement tank')}}</option>
+                    <option value="Byarrel/Plastic Drums">{{__('messages.Byarrel drums')}}</option>
+                    <option value="Refrigerators">{{__('messages.Refrigerators')}}</option>
+                    <option value="Others">{{__('messages.Others')}}</option>
                 </select>
 
             </div>
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4 outdoordiv" style="position: relative;margin-bottom: 15px !important;">
-                <label for="waste" class="color-highlight profess-tag">Outdoor of the House</label>
+                <label for="waste" class="color-highlight profess-tag">{{__('messages.Outdoor of the house')}}</label>
                 <select   class="form-select outdoor profess-tag-1" id="outdoor" name="outdoor" data-placeholder="{{ __('messages.regselect') }}"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
                     <option label='Please Select' value=''>Select any one</option>
-                    <option value="Plastic Tanks/Drums">Plastic Tanks/Drums</option>
-                    <option value="Cement Tanks/Sumps">Cement Tanks/Sumps</option>
-                    <option value="Flower Pots">Flower Pots</option>
-                    <option value="Tyres">Tyres</option>
-                    <option value="Other Solid Wastes">Other Solid Wastes</option>
+                    <option value="Plastic Tanks/Drums">{{__('messages.Plastic Drums')}}</option>
+                    <option value="Cement Tanks/Sumps">{{__('messages.Cement Sumps')}}</option>
+                    <option value="Flower Pots">{{__('messages.Flower pots')}}</option>
+                    <option value="Tyres">{{__('messages.Tyres')}}</option>
+                    <option value="Other Solid Wastes">{{__('messages.Other solid wastes')}}</option>
                 </select>
 
             </div>
             <div class="col-md-12 input-style-always-active has-borders no-icon mb-4 " style="position: relative;margin-bottom: 15px !important;">
-                <label for="waste" class="color-highlight profess-tag">Source Reduction</label>
+                <label for="waste" class="color-highlight profess-tag">{{__('messages.Source Reduction')}}</label>
                 <select   class="form-select source_reduction profess-tag-1" id="source_reduction" name="source_reduction" data-placeholder="{{ __('messages.regselect') }}"  style="border-color: rgba(0, 0, 0, 0.08) !important;">
                     <option label='Please Select' value=''>Select any one</option>
-                    <option value="Done">Done</option>
-                    <option value="Not Done">Not Done</option>
+                    <option value="Done">{{__('messages.Done')}}</option>
+                    <option value="Not Done">{{__('messages.Not done')}}</option>
                 </select>
 
             </div>
@@ -130,15 +130,15 @@
 </div>
                
             <div class="input-style input-style-always-active has-borders no-icon mb-4">
-                <textarea id="descp" class="form-control descp" placeholder="Enter the remarks" name="descp" required></textarea>
-                <label for="descp" class="color-highlight">Remarks</label>
+                <textarea id="descp" class="form-control descp" placeholder="{{__('messages.Enter your remarks')}}" name="descp" required></textarea>
+                <label for="descp" class="color-highlight">{{__('messages.Remarks')}}</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
             </div>
             
             <div class="input-style input-style-always-active has-borders no-icon validate-field mb-4 mt-2">
                 <input type="file" class="form-control validate-text image" id="cameraInput" name="image[]" accept="image/*"   required>
-                <label for="" class="color-highlight ">Upload image</label>
+                <label for="" class="color-highlight ">{{__('messages.Upload images')}}</label>
                 
             </div>
             
@@ -159,7 +159,7 @@
                
             
               <center>
-            <input type="submit" class="sbt btn btn-m btn-full rounded-sm shadow-l bg-green-dark text-uppercase font-700 mt-4" value="Submit">
+            <input type="submit" class="sbt btn btn-m btn-full rounded-sm shadow-l bg-green-dark text-uppercase font-700 mt-4" value="{{__('messages.Submit')}}">
             </center>
             
             </div>
@@ -384,7 +384,7 @@ $.ajax({
         
             let res = $(this).val();
             
-            alert(res);
+            // alert(res);
             
             if(res == "Indoor"){
                 $(".indoordiv").show();

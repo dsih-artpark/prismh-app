@@ -166,9 +166,10 @@ class AdminController extends Controller
              
         $zoneWiseWastePickUpCounts = DB::select("SELECT COUNT(p.id) as 'waste_pick_up_counts_in_all_active_zones' FROM `pick` p inner JOIN zone z on p.zone=z.id where z.status=1 group by p.zone"); 
         $zoneWiseWasteDumpCounts = DB::select("SELECT COUNT(d.id) as 'waste_dump_counts_in_all_active_zones' FROM `dump` d inner JOIN pick p on d.pid=p.id group by d.zone");
-             
+        $locations = DB::table('pick')->get();
+        
             //  dd($reports);
-            return view('admin.dashboard', compact('reports', 'zoneWiseWastePickUpCounts', 'zoneWiseWasteDumpCounts'));
+            return view('admin.dashboard', compact('reports','locations','zoneWiseWastePickUpCounts', 'zoneWiseWasteDumpCounts'));
         }  
     }
     

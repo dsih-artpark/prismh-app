@@ -172,6 +172,7 @@ return [
         Ichtrojan\Otp\OtpServiceProvider::class,
         Craftsys\Msg91\Msg91LaravelServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...

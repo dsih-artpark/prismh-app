@@ -13,7 +13,7 @@
 
 <div class="page-title page-title-small">
     <!--<a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>-->
-    <h2>Dashboard</h2>
+    <h2>{{__('messages.Dashboard')}}</h2>
     
     <!--<div class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none text-capitalize" style="position: fixed;top: 32px;color: white;left: 185px;"> {{Auth::guard('customer')->user()->reg_id}}  {{Auth::guard('customer')->user()->username}}</div>-->
     <!--<div class="d-xs-none d-sm-none d-md-block d-lg-block d-xl-block text-capitalize" style="position: fixed;top: 32px;color: white;left: 200px;"> {{Auth::guard('customer')->user()->reg_id}} {{Auth::guard('customer')->user()->username}}</div>-->
@@ -56,12 +56,12 @@
                         
                         @endphp
                         <h1 class="color-highlight mb-0 pb-1">{{$rest}}</h1>
-                        <h5 class="color-theme text-center font-13 font-500 line-height-s pb-3 mb-3">Total Larva Surveys</h5>
+                        <h5 class="color-theme text-center font-13 font-500 line-height-s pb-3 mb-3">{{ __('messages.Total larva survey') }}</h5>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-6 font-20 text-center px-0">
                        
                          <h1 class="color-highlight mb-0 pb-1">{{$res}}</h1>
-                        <h5 class="color-theme text-center  font-13 font-500 line-height-s pb-3 mb-3">Todays Larva Survey </h5>
+                        <h5 class="color-theme text-center  font-13 font-500 line-height-s pb-3 mb-3">{{ __('messages.Todays larva survey') }}</h5>
                     </div>
                     
                    
@@ -73,10 +73,10 @@
     <div class="row">
        
         <div class="col-6">
-            <a href="{{route('login.pick')}}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight">Larva Survey</a>
+            <a href="{{route('login.pick')}}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight">{{__('messages.Larva Survey')}}</a>
         </div>
         <div class="col-6">
-            <a href="{{route('login.survey-patient')}}" class="btn btn-full btn-border btn-m rounded-s text-uppercase font-900 shadow-l border-highlight color-highlight">Fever Survey</a>
+            <a href="{{route('login.survey-patient')}}" class="btn btn-full btn-border btn-m rounded-s text-uppercase font-900 shadow-l border-highlight color-highlight">{{__('messages.Fever Survey')}}</a>
         </div>
     </div>
 </div>

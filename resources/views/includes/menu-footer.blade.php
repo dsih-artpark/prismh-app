@@ -14,7 +14,7 @@
           <a href="#" class="back-to-top icon icon-xs rounded-sm shadow-l bg-highlight color-white"><i class="fa fa-arrow-up"></i></a>
           
         </div>
-        <p class="boxed-text-l">For any technical support kindly contact through <br>WhatsApp message preferably <br> <a href="https://wa.me/919066798311" target="_blank">9066798311</a> </p>
+        <p class="boxed-text-l">{{ __('messages.footer1') }}<br>{{ __('messages.footer2') }} <br> <a href="https://wa.me/919066798311" target="_blank">9066798311</a> </p>
     
       </div>
       <!--<div class="col-6 ps-0">-->

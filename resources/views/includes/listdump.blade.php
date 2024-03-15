@@ -11,7 +11,7 @@
 @section('content')
 
 <div class="page-title page-title-small">
-    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>list of Larva Surveys</h2>
+    <h2><a href="#" data-back-button><i class="fa fa-arrow-left"></i></a>{{__('messages.List of Larva survey')}}</h2>
       <!--<a class=" float-end lan-btn btn changeLang" id="{{ __('messages.langid') }}" href="#" ><span>{{ __('messages.lang') }}</span></a>-->
        @if(Auth::guard('customer')->user()->profile)
       <a href="#" data-menu="menu-main" class="bg-fade-highlight-light shadow-xl preload-img" data-src="{{asset('uploads/customer')}}/{{Auth::guard('customer')->user()->profile}}"></a>
@@ -56,8 +56,8 @@
 <!--<span class="color-black">Survey Details</span><br>-->
 <div class="divider mb-0"></div>
 
-        <span class="color-black">Date : {!! date('d-m-Y ', strtotime($res->created_at)) !!}</span><br>
-        <span class="color-black">Time : {!! date('h:i a', strtotime($res->created_at)) !!}</span>
+        <span class="color-black">{{__('messages.Date')}} : {!! date('d-m-Y ', strtotime($res->created_at)) !!}</span><br>
+        <span class="color-black">{{__('messages.Time')}} : {!! date('h:i a', strtotime($res->created_at)) !!}</span>
 
       
 
@@ -79,8 +79,8 @@
 <!--<span class="color-black">Survey Details</span><br>-->
 <div class="divider mb-0"></div>
 
-        <span class="color-black">Date : {!! date('d-m-Y ', strtotime($res->created_at)) !!}</span><br>
-        <span class="color-black">Time : {!! date('h:i a', strtotime($res->created_at)) !!}</span>
+        <span class="color-black">{{__('messages.Date')}} : {!! date('d-m-Y ', strtotime($res->created_at)) !!}</span><br>
+        <span class="color-black">{{__('messages.Time')}} : {!! date('h:i a', strtotime($res->created_at)) !!}</span>
     
 
 
