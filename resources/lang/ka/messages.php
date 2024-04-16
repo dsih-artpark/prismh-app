@@ -212,8 +212,8 @@ return [
 "Enter the password"=>"ಸಂಕೇತ ಪದವನ್ನು ನಮೂದಿಸಿ",
 "Enter the confirm password"=>"ದೃಢೀಕರಣ ಸಂಕೇತ ಪದವನ್ನು ನಮೂದಿಸಿ",
 "Please Select"=>"ಆಯ್ಕೆ ಮಾಡಿ",
-
-
-
+"location" => "ಸ್ಥಳ",
+"Larva Survey Location"=>"ಮೂಲ ಕಡಿತದ ಸ್ಥಳ",
+"Query"=>"Query",
 
 ];

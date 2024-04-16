@@ -264,5 +264,7 @@ return [
 "Enter the password"=>"Enter the password",
 "Enter the confirm password"=>"Enter the confirm password",
 "Please Select"=>"Please Select",
-  
+"location" => "Location",
+"Larva Survey Location"=>"Larva Survey Location",
+"Query"=>"Query",
 ];

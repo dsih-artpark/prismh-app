@@ -278,6 +278,12 @@ class WastePickupController extends Controller
         $remark = $record->descp ?? '-';
         $date = date("Y-m-d", strtotime($record->created_at));
         $action = '<a href="'.route('admin.breedingspots.view' , ['id' => $record->id]).'" class="btn btn-outline-primary-2x"><i class="fa fa-eercast" aria-hidden="true"></i></a>';
+        $latlng = explode(',',$record->latit);
+        $ward = DB::table('ward')->whereId($record->ward)->first();
+        if($latlng[0] >= $ward->x_min && $latlng[0] <= $ward->x_max && $latlng[1] >= $ward->y_min && $latlng[1] <= $ward->y_max)
+          $within_ward = '<span class="badge badge-success">Yes</span>';
+        else
+          $within_ward = '<span class="badge badge-danger">No</span>';
 
         $data_arr[] = array(
             "id" => $id,
@@ -285,6 +291,7 @@ class WastePickupController extends Controller
             "username" => $username,
             "q1" => $spot,
             "image_data" => $image,
+            "within_ward" => $within_ward,
             "descp" => $remark,
             "created_at" => $date,
             "action" => $action,

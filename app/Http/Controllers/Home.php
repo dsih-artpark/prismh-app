@@ -179,6 +179,17 @@ class Home extends Controller
         }
         
     }
+    public function history_location($id){
+      if(Auth::guard('customer')->check())
+        {
+        $upid = Auth::guard('customer')->user()->id;
+        $datadetails =  DB::table('pick')->where('cust_id', $upid)->where('id', $id)->first();
+          return view('includes.history_location', compact('datadetails')); 
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
     public function loginhistory()
     {
         if(Auth::guard('customer')->check())
@@ -263,7 +274,7 @@ class Home extends Controller
                 $destinationPath = base_path('public/uploads/pick');
                 // $file->move($destinationPath, $image_name);
                 $img = Image::make($file->getRealPath());
-                $img->resize($x, $y, function ($constraint) {
+                $img->orientate()->resize($x, $y, function ($constraint) {
                     $constraint->aspectRatio();
                 })->resizeCanvas($x, $y)->save($destinationPath.'/'.$image_name);
                 $images[]=$image_name;
@@ -327,6 +338,41 @@ class Home extends Controller
         }
         else{
             return redirect()->route('login');
+        }
+    }
+    public function loginpick_ward(Request $request){
+      if(Auth::guard('customer')->check())
+        {
+          $user_ward = null;
+          if(Auth::guard('customer')->user()->ward){
+            $ward_ids = DB::table('ward')
+                         ->where('x_min', '<=', $request->lat)
+                         ->where('x_max', '>=', $request->lat)
+                         ->where('y_min', '<=', $request->long)
+                         ->where('y_max', '>=', $request->long)
+                         ->pluck('id')->toArray();
+            if(in_array(Auth::guard('customer')->user()->ward, $ward_ids)){
+              return response()->json([
+                'success' => false,
+              ]);
+            }else{
+              $ward_name = DB::table('ward')->whereId(Auth::guard('customer')->user()->ward)->value('name');
+              $message = 'It looks like you are outside '.$ward_name. ' area. Please check your location before continue.';
+              return response()->json([
+                'success' => true,
+                'title' => 'Warning!',
+                'message' => $message,
+              ]);
+            }
+          }else 
+          return response()->json([
+            'success' => false
+          ]);
+        }
+        else{
+          return response()->json([
+            'success' => false
+          ]);
         }
     }
     public function logindump()
@@ -603,7 +649,7 @@ class Home extends Controller
                 $data['password'] = Hash::make($request->password);
                 $data['created_at'] = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
                 $data['updated_at'] = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
-                $data['status'] = '1';
+                $data['status'] = '0';
                 if($request->hasFile('id_card') && $request->id_card){
                   $file = $request->id_card;
                   $extension = File::extension($file->getClientOriginalName());
@@ -682,7 +728,7 @@ class Home extends Controller
       DB::table('verification_otps')->where('phone',$request->phone)->delete();
       DB::table('verification_otps')->insert(['phone'=>$phone, 'otp'=>$otp]);
       $customer = DB::table('customers')->where('phone',$phone)->first();
-      $res = $this->send_mail($customer->email, $otp);
+      $res = $this->send_mail($customer->email, $otp.' is OTP to change your password.', 'Password change OTP.');
       \Session::forget('error');
       $success = 'OTP sent successfully.';
       return view('includes.confirm_otp', compact('phone','success'));
@@ -714,7 +760,7 @@ class Home extends Controller
         }
         return $str;
     }
-    private function send_mail($to, $otp){
+    private function send_mail($to, $content, $subject){
       try{
         $postfields = '{
                         "personalizations": [{
@@ -725,10 +771,10 @@ class Home extends Controller
                         "from": {
                           "email": "info@mcwaretechnologies.com"
                         },
-                        "subject": "Password change OTP.",
+                        "subject": "'.$subject.'",
                         "content": [{
                           "type": "text/plain", 
-                          "value": "'.$otp.' is OTP to change your password."
+                          "value": "'.$content.'"
                         }]
                       }';
         $ch = curl_init();
@@ -787,37 +833,57 @@ class Home extends Controller
        $data['password'] = Hash::make($request->password);
        $res = DB::table('customers')->where('phone', $request->input('phone'))->update($data);
        
-    if(!empty($res))
-    {
-      DB::table('verification_otps')->where('phone',$request->phone)->delete();
-       return redirect()->route('login')->with('success', 'Password Changed');
+      if(!empty($res))
+      {
+        DB::table('verification_otps')->where('phone',$request->phone)->delete();
+        return redirect()->route('login')->with('success', 'Password Changed');
+      }
+      else{
+          return redirect()->back()->with('error', 'Password is not updated, Please enter the new password');
+      }
+        
     }
-    else{
-        return redirect()->back()->with('error', 'Password is not updated, Please enter the new password');
-    }
-       
-   }
    
-    public function loginind()
+    public function loginind(Request $request)
     {
-        
-            return view('includes.login'); 
-        
+      if($request->ajax()){
+        $customer =  DB::table('customers')->where('roles','=',1)->where('phone', $request->input('phone'))->first();
+        if($customer && $customer->status == 1){
+          try{
+          $otp = rand(100000, 999999);
+          $is_otp = DB::table('login_otp')->where('phone', $request->input('phone'))->first();
+          if($is_otp)
+            DB::table('login_otp')->where('phone', $request->input('phone'))->update(['otp'=>$otp]);
+          else
+            DB::table('login_otp')->insert(['phone' => $request->phone, 'otp'=>$otp]);
+          $res = $this->send_mail($customer->email, $otp.' is your login OTP.', 'Login OTP.');
+          return response()->json(['success'=>true, 'message'=>'OTP Sent to your email Successfully.']);
+          }catch(\Exception $e){
+            // return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
+            return response()->json(['success'=>false, 'message'=>'OTP service is not available now. Please login using your password.']);
+          }
+        }else if($customer && $customer->status == 0){
+          return response()->json(['success'=>false, 'message'=>'Your account has been deactivated.']);
+        }else{
+          return response()->json(['success'=>false, 'message'=>'User doesn\'t exist. Please register or enter correct number.']);
+        }
+      }
+      if($request->type && $request->type == 'otp_login')
+      return view('includes.login_otp');
+      return view('includes.login');
     }
     
     public function login(Request $request)
     {
-    $chkphone =  DB::table('customers')->where('roles','=',1)->where('phone', $request->input('phone'))->where('password', Hash::check('plain-text', $request->input('password')))->first();
+        $chkphone =  Customer::where('roles','=',1)->where('phone', $request->input('phone'))->where('password', Hash::check('plain-text', $request->input('password')))->first();
 
-    if(!empty($chkphone))
-    {
-
-        if(Hash::check($request->input('password'),$chkphone->password))
+        if(!empty($chkphone))
         {
-            $credentials = $request->only('phone', 'password');
-            // dd($credentials);
-            if(Auth::guard('customer')->attempt($credentials))
-            {
+            if($request->has('otp') && $request->otp && $chkphone->status == 1){
+              $check_otp = DB::table('login_otp')->where('phone', $request->phone)->first();
+              if($check_otp->otp == $request->otp){
+                Auth::guard('customer')->login($chkphone);
+                DB::table('login_otp')->where('phone', $request->phone)->delete();
                 //customer login session
                 $dat = Auth::guard('customer')->user();
                 $request->session()->put('customers' , $dat);
@@ -830,24 +896,48 @@ class Home extends Controller
                 DB::table('customers_logs')->insert($updata);
                 
                 return redirect()->route('login.dashboard')->with('success','Your account has been logged in successfully!');
-                
+              }
+              else
+                return redirect()->back()->with('error','Incorrect OTP');
             }
+            if(Hash::check($request->input('password'),$chkphone->password) && $chkphone->status == 1)
+            {
+                $credentials = $request->only('phone', 'password');
+                // dd($credentials);
+                if(Auth::guard('customer')->attempt($credentials))
+                {
+                    //customer login session
+                    $dat = Auth::guard('customer')->user();
+                    $request->session()->put('customers' , $dat);
+                    $request->session()->save();
+                    
+                    //customer logs
+                    $updata['custid'] = Auth::guard('customer')->user()->id;
+                    $updata['login'] = date('Y-m-d H:i:s');
+                    $updata['ip'] = $request->ip();
+                    DB::table('customers_logs')->insert($updata);
+                    
+                    return redirect()->route('login.dashboard')->with('success','Your account has been logged in successfully!');
+                    
+                }
+                else
+                {
+                    return redirect()->route('login');
+                } 
+            }
+            else if($chkphone->status == 0)
+              return redirect()->route('login')->with('error','Your account has been deactivated.');
             else
             {
-                return redirect()->route('login');
-            } 
+                return redirect()->route('login')->with('error','Incorrect password');
+            }
         }
         else
         {
-            return redirect()->route('login')->with('error','Incorrect password');
+            return redirect()->route('login')->with('error','Invalid Credentials'); 
         }
-    }
-    else
-    {
-        return redirect()->route('login')->with('error','Invalid Credentials'); 
-    }
 
-}
+    }
     
     public function logindashboard()
     {
@@ -1030,7 +1120,7 @@ class Home extends Controller
         ->where('customers.status', 1)->get();
         // $members = Customer::all();
         return view('includes.listmembers', compact('members'));  
-    }
+      }
         else{
             return view('includes.login'); 
         }
@@ -1040,7 +1130,7 @@ class Home extends Controller
     {
         $memberdetails = Customer::select('customers.*')
         
-    //    $memberdetails = Customer::select('customers.*', 'pwa_category.name as catname', 'pwa_subcategory.name as subcatname', 'pwa_chapter.name as chaptername', 'pwa_country.name as countryname', 'pwa_state.name as statename')
+      //    $memberdetails = Customer::select('customers.*', 'pwa_category.name as catname', 'pwa_subcategory.name as subcatname', 'pwa_chapter.name as chaptername', 'pwa_country.name as countryname', 'pwa_state.name as statename')
         // ->join('pwa_category','customers.category','=', 'pwa_category.id')
         // ->join('pwa_subcategory','customers.subcategory','=', 'pwa_subcategory.id')
         // ->join('pwa_chapter','customers.chapter','=', 'pwa_chapter.id')

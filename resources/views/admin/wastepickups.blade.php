@@ -59,6 +59,7 @@
                               <th>Asha Worker Name</th>
                               <th>Breeding Spot</th>
                               <th>Image</th>
+                              <th>Within Ward</th>
                               <th>Remarks</th>
                               <th>Date</th>
                               <th>Action</th>
@@ -191,6 +192,7 @@
                         { data: 'username' },
                         { data: 'q1' },
                         { data: 'image_data' },
+                        { data: 'within_ward' },
                         { data: 'descp' },
                         { data: 'created_at' },
                         { data: 'action' },

@@ -72,11 +72,14 @@
         <div class="content mt-0">
     <div class="row">
        
-        <div class="col-6">
+        <div class="col-4">
             <a href="{{route('login.pick')}}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight">{{__('messages.Larva Survey')}}</a>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <a href="{{route('login.survey-patient')}}" class="btn btn-full btn-border btn-m rounded-s text-uppercase font-900 shadow-l border-highlight color-highlight">{{__('messages.Fever Survey')}}</a>
+        </div>
+        <div class="col-4">
+            <a href="{{route('query.index')}}" class="btn btn-full btn-border btn-m rounded-s text-uppercase font-900 shadow-l border-highlight color-highlight">{{__('messages.Query')}}</a>
         </div>
     </div>
 </div>

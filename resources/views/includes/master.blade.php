@@ -88,11 +88,11 @@
 @if(Auth::guard('customer')->check())
         <div id="footer-bar" class="footer-bar-5">
             
-           <!--<a href="{{ route('login.history') }}" class="<?= (Route::currentRouteName() == 'login.history') || (Route::currentRouteName() == 'login.history.detail') || (Route::currentRouteName() == 'login.opportunity.add') || (Route::currentRouteName() == 'login.opportunity.details') ? 'active-nav': '' ;?>">-->
+           <!--<a href="{{ route('login.history') }}" class="<?= (Route::currentRouteName() == 'login.history') || (Route::currentRouteName() == 'login.history.detail') || (Route::currentRouteName() == 'login.history.location') || (Route::currentRouteName() == 'query.index') || (Route::currentRouteName() == 'login.opportunity.add') || (Route::currentRouteName() == 'login.opportunity.details') ? 'active-nav': '' ;?>">-->
            <!--     <i data-feather="globe" data-feather-line="1" data-feather-size="21" data-feather-color="dark-dark" data-feather-bg="gray-fade-light"></i>-->
            <!--     <span>History</span>-->
            <!-- </a>-->
-           <a href="{{ route('login.surveys.list') }}" class="<?= (Route::currentRouteName()== 'login.surveys.list') || (Route::currentRouteName()== 'login.pick') || (Route::currentRouteName() == 'login.history.detail') ||  (Route::currentRouteName()== 'login.source-reduction.id') ? 'active-nav': '' ;?>">
+           <a href="{{ route('login.surveys.list') }}" class="<?= (Route::currentRouteName()== 'login.surveys.list') || (Route::currentRouteName()== 'login.pick') || (Route::currentRouteName() == 'login.history.detail') || (Route::currentRouteName() == 'login.history.location') || (Route::currentRouteName() == 'query.index') ||  (Route::currentRouteName()== 'login.source-reduction.id') ? 'active-nav': '' ;?>">
                 <i data-feather="heart" data-feather-line="1" data-feather-size="21" data-feather-color="green-dark" data-feather-bg="green-fade-light"></i>
                 <span>{{__('messages.Larva Survey')}}</span>
             </a>

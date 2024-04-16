@@ -74,7 +74,7 @@ class ApiController extends Controller
       return response()->json(['success' => false, 'message' => 'Unauthorized.'], 401);
     $length = $request->length??5000;
     $datas = DB::table('pick')
-    ->select('pick.id as Id','customers.username as Asha worker','pick.q1 as Breeding spot','pick.waste as Container Type','pick.descp as Remarks','pick.image_data as Image','pick.source_reduction as Source Reduction','pick.source_reduction_img as Source Reduction Image','ward.name as Ward Name','pick.latit as Latitude and Longitude','pick.created_at as Date and Time')
+    ->select('pick.id as Id','pick.uid as Uid','customers.username as Asha worker','pick.q1 as Breeding spot','pick.waste as Container Type','pick.descp as Remarks','pick.image_data as Image','pick.source_reduction as Source Reduction','pick.source_reduction_img as Source Reduction Image','ward.name as Ward Name','pick.latit as Latitude and Longitude','pick.created_at as Date and Time')
     ->join('customers', 'pick.cust_id', '=', 'customers.id' ,'left')
     ->join('ward', 'pick.ward', '=', 'ward.id' ,'left')
     ->where('pick.status', 1)

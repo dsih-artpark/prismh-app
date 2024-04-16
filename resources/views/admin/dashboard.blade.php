@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/vendors/chartist.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/vendors/owlcarousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/vendors/prism.css') }}">
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <style>
         div.dt-buttons {
 position: relative;
@@ -366,121 +366,131 @@ $monthlyCount = DB::table('pick')
 
 @section('footerbar_script')
 @parent
-
-
-
   
-  
-
-  
-   <script src="{{ asset('admin/assets/js/chart/chartjs/chart.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/chartist/chartist.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/chartist/chartist-plugin-tooltip.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/apex-chart.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/stock-prices.js') }}"></script>
     <script src="{{ asset('admin/assets/js/prism/prism.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/counter/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/counter/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/counter/counter-custom.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/owlcarousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/owlcarousel/owl-custom.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/dashboard/dashboard_2.js') }}"></script>
-    <!--<script src="{{ asset('admin/assets/js/chart-widget.js') }}"></script>-->
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
-    <script src="{{ asset('admin/assets/js/chart/apex-chart/chart-custom.js')}}"></script>
-    
-
-
     <script src="{{ asset('admin/assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/jszip.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.autoFill.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/buttons.print.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.keyTable.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.colReorder.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.fixedHeader.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.rowReorder.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/datatable/datatable-extension/dataTables.scroller.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/custom.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/datatable/datatable-extension/custom.js') }}"></script>  
     
-    
-       <script type="text/javascript">
+    <script type="text/javascript">
 
-			"use strict";
+        "use strict";
 
-		 $(document).ready(function(){
-		     
-				var SITEURL = '{{url('')}}';
+      $(document).ready(function(){
+          
+          var SITEURL = '{{url('')}}';
 
-				// Csrf Field
-				$.ajaxSetup({
-					headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-    
-                var table = $('#content').DataTable({
-                     dom: '<"top">t<"bottom"><"clear">'
-                });
-                 $('#zone').DataTable(
-                     );
+          // Csrf Field
+          $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+      
+                  var table = $('#content').DataTable({
+                      dom: '<"top">t<"bottom"><"clear">'
+                  });
+                  $('#zone').DataTable({dom:'t'});
 
-     });
+      });
+    </script>
+
+  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});
+    var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));
+    e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);
+    a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));
+    a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));
+    d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyAzhEbRtsoayqY94uOYInJIPCJp5Y6e7cY", v: "weekly"});
   </script>
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzhEbRtsoayqY94uOYInJIPCJp5Y6e7cY&callback=initMap&libraries=&v=weekly" async> </script>
-
-<script>
-  function initMap() {
-    // var locations = [
-    //   [12.972442, 77.58064],
-    //   [12.972442, 77.58064],
-    // ];
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 11,
-      center: new google.maps.LatLng(12.972442, 77.580643),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });    
-    var infowindow = new google.maps.InfoWindow();
-    var marker, i;   
+  <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+  <script>
+    var geodata = [];
     const green_marker =  "http://maps.google.com/mapfiles/ms/micons/green-dot.png";
-    // for (i = 0; i < locations.length; i++) {  
-      @foreach($locations as $location)
-        @if($location->latit)        
-          @if($location->source_reduction == 'Done')
-            marker = new google.maps.Marker({
-              // position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-              position: new google.maps.LatLng({{explode(',', $location->latit)[0]}}, {{explode(',', $location->latit)[1]}}),
-              map: map,
-              icon: green_marker
-            });
-          @else
-            marker = new google.maps.Marker({
-              // position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-              position: new google.maps.LatLng({{explode(',', $location->latit)[0]}}, {{explode(',', $location->latit)[1]}}),
-              map: map,
-            });
-          @endif
-          // google.maps.event.addListener(marker, 'click', (function(marker, i) {
-          //   return function() {
-          //     infowindow.setContent(locations[i][0]);
-          //     infowindow.open(map, marker);
-          //   }
-          // })(marker, i));
+    const red_marker =  "http://maps.google.com/mapfiles/ms/micons/red-dot.png";
+    @foreach($locations as $location)
+      @if($location->latit)        
+        @if($location->source_reduction == 'Done')
+          geodata.push({lat:{{explode(',', $location->latit)[0]}},lng:{{explode(',', $location->latit)[1]}}, dark: '#114232', light: '#87A922'});
+        @else
+          geodata.push({lat:{{explode(',', $location->latit)[0]}},lng:{{explode(',', $location->latit)[1]}}, dark: '#A94438', light: '#D24545'});
         @endif
-      @endforeach
-    // }
-  }
-</script>
+      @endif
+    @endforeach
+    async function initMap() {
+      const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
+        "marker",
+      );
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10, 
+        center: { lat: 12.9716, lng: 77.5946 },
+        mapId: "ZONE_SERVEY_MAP",
+      });
+      const infoWindow = new google.maps.InfoWindow({
+        content: "",
+        disableAutoPan: true,
+      });
+
+      const markers = geodata.map((data, i) => {
+        const pinGlyph = new google.maps.marker.PinElement({
+          // glyph: ,
+          background: data.light,
+          borderColor: data.dark,
+          glyphColor: data.dark,
+        });
+        const marker = new google.maps.marker.AdvancedMarkerElement({
+          position: { lat: data.lat, lng: data.lng },
+          content: pinGlyph.element,
+        });
+        // open info window when marker is clicked
+      /*  marker.addListener("click", () => {
+          infoWindow.setContent(position.lat + ", " + position.lng);
+          infoWindow.open(map, marker);
+        }); */
+          return marker;
+      });
+      new markerClusterer.MarkerClusterer({ markers, map });
+
+    let areaPolygon = [];
+    let Coords = '';
+    let bermudaTriangle = '';
+    let random_color = '#FF0000';
+    @foreach($zones as $key => $zone)
+      areaPolygon = [];
+        @php 
+          $boundries = explode('|', $zone->boundry);
+        @endphp
+        @foreach($boundries as $boundry)
+          @php
+            $cords = explode(',',$boundry);
+          @endphp
+          Coords = {lat: {{$cords[0]}}, lng: {{$cords[1]}}};
+          areaPolygon.push(Coords);
+        @endforeach
+      random_color = "{{$zone->color??'#FF0000'}}";
+      bermudaTriangle = new google.maps.Polygon({
+        paths: areaPolygon,
+        strokeColor: random_color,
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        fillColor: random_color,
+        fillOpacity: 0.2,
+      });
+      bermudaTriangle.setMap(map);
+    @endforeach
+
+    }
+
+    initMap();
+  </script>
+ 
 @endsection

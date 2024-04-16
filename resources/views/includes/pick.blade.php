@@ -4,6 +4,7 @@
 @parent
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css">
 <style>
     video
     {
@@ -169,12 +170,7 @@
 
             </div>
         </div>
-                
-                
-               
-                
-               
-                
+        
 @endsection
 
 @section('footer')
@@ -186,7 +182,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
 <script>
     // Function to handle file input change event
     $(document).on('change', '.image', function (e) {
@@ -235,26 +231,72 @@
 <script>
 $(document).ready(function() 
 {
-var x = document.getElementById("demo");
+  var x = document.getElementById("demo");
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+  function showPosition(position) {
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    document.getElementById('latit').value = lat+","+long;
+    $.ajax({
+      method: "POST",
+      url: "{{ route('login.pick_ward') }}",
+      data: {_token: "{{csrf_token()}}", lat: lat, long: long},
+    })
+    .done(function (res) {
+      if(res.success){
+        Swal.fire({
+        //   title: res.title,
+          text: res.message,
+          icon: "",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Close"
+        });
+      }
+    })
+    .fail(function (err) {
+      console.log(err);              
+    });
 
+  }
 
+  function permission_for(type){
+    return new Promise((resolve) => {
+      navigator.permissions.query({ name: type }).then(res => {
+        if(res.state == 'denied')
+        resolve(1);
+        resolve(0);
+      });
+    });
+  }
 
-if (navigator.geolocation) {
-navigator.geolocation.getCurrentPosition(showPosition);
-} else { 
-x.innerHTML = "Geolocation is not supported by this browser.";
-}
-
-
-function showPosition(position) {
-
-var lat = position.coords.latitude;
-var long = position.coords.longitude;
-// $("#lattitude").val(lat); 
-// $("#longitude").val(long); 
-document.getElementById('latit').value = lat+","+long;
-
-}
+  async function check_permissions(){
+    var msg = 'Please allow permissions for ';
+    var is_camera = await permission_for('camera');
+    var is_location = await permission_for('geolocation');
+    
+    navigator.permissions.query({ name: "geolocation" }).then(res => {
+      if(res.state != 'granted') is_location = 1;
+    });
+    if(is_camera && is_location) msg += 'Camera & Location';
+    else if(is_camera) msg += 'Camera';
+    else if(is_location) msg += 'Location';
+    else msg = '';
+    if(msg.length){
+      Swal.fire({
+          text: msg,
+          icon: "",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Close"
+        });
+    }
+  }
+  check_permissions();
 
 });
 

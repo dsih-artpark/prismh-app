@@ -81,6 +81,9 @@ Route::get('menufooter', function () {
 //Clear all caches
  Route::get('/cache/1', function() {
      \Artisan::call('route:cache');
+     \Artisan::call('config:cache');
+     \Artisan::call('cache:clear');
+     \Artisan::call('view:clear');
      return 'Routes cache cleared';
  });
   Route::get('/cache/2', function() {
@@ -192,6 +195,7 @@ Route::post('loginindex', 'App\Http\Controllers\Home@login')->name('login.api');
 Route::any('login/profile', 'App\Http\Controllers\Home@loginprofile')->name('login.profile');
 Route::any('login/dashboard', 'App\Http\Controllers\Home@logindashboard')->name('login.dashboard');
 Route::any('login/survey', 'App\Http\Controllers\Home@loginpick')->name('login.pick');
+Route::post('login/survey-ward', 'App\Http\Controllers\Home@loginpick_ward')->name('login.pick_ward');
 Route::any('login/pickstore', 'App\Http\Controllers\Home@pickstore')->name('login.pickstore');
 Route::any('login/surveys', 'App\Http\Controllers\Home@loginsurveylist')->name('login.surveys.list');
 Route::any('login/dump', 'App\Http\Controllers\Home@logindump')->name('login.dump');
@@ -202,9 +206,12 @@ Route::any('login/source-reduction/{id}', 'App\Http\Controllers\Home@loginsource
 Route::any('login/source-reduction/store/{id}', 'App\Http\Controllers\Home@loginsourcereductionstore')->name('login.source-reduction.store');
 Route::any('login/history', 'App\Http\Controllers\Home@loginhistory')->name('login.history');
 Route::any('login/history/detail/{id}', 'App\Http\Controllers\Home@historydetails')->name('login.history.detail');
+Route::any('login/history/location/{id}', 'App\Http\Controllers\Home@history_location')->name('login.history.location');
 
 Route::any('login/survey-patient', 'App\Http\Controllers\Home@loginsurveypatient')->name('login.survey-patient');
 Route::any('login/survey-patient/store', 'App\Http\Controllers\Home@surveypatientstore')->name('login.survey-patient.store');
+
+Route::get('login/query', 'App\Http\Controllers\QueryController@index')->name('query.index');
 
 Route::any('login/events', 'App\Http\Controllers\Home@loginevents')->name('login.events');
 Route::any('login/events/detail/{id}', 'App\Http\Controllers\Home@logineventsdetails')->name('login.events.detail');
@@ -294,6 +301,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('users/update/{id}','App\Http\Controllers\Admin\AdminController@usersupdate')->name('admin.users.update');
     Route::get('users/edit/{id}','App\Http\Controllers\Admin\AdminController@adminusersedit')->name('adminusers.edit');
     Route::get('users/list','App\Http\Controllers\Admin\AdminController@listusers')->name('adminusers');
+    Route::post('users/status/update','App\Http\Controllers\Admin\AdminController@update_status')->name('adminusers.update_status');
 	Route::get('users/approvals/{id}/{sts}','App\Http\Controllers\Admin\AdminController@manageusersapprovalsid')->name('adminusersapprovals.id');
    
 

@@ -216,16 +216,21 @@
                             </td>
                             
                             <td>
-                                
-                                
-                        
-                         @if($my_tck->status == 1)
-                         <button class=" btn-success btn-round btn-1x" type="button">Approved</button>
-                            @else
-                           <button class=" btn-default btn-round btn-1x" type="button">Not defined</button>
-                            
-                            @endif
-                       
+                              <div class="media-body text-center switch-sm">
+                              @if($my_tck->status == 1)
+                                <!-- <button class=" btn-success btn-round btn-1x" type="button">Approved</button> -->
+                                <label class="switch">
+                                  <input type='checkbox' checked onchange="changeStatus({{$my_tck->id}})">
+                                  <span class="switch-state"></span>
+                                </label>
+                              @else
+                                <label class="switch">
+                                  <input type='checkbox' onchange="changeStatus({{$my_tck->id}})">
+                                  <span class="switch-state"></span>
+                                </label>
+                                <!-- <button class=" btn-default btn-round btn-1x" type="button">Not defined</button> -->
+                              @endif                     
+                              </div>
                      
                             </td>
 
@@ -274,11 +279,12 @@
 
 <script src="{{asset('admin/assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
    
+<script src="{{asset('admin/assets/js/notify/bootstrap-notify.min.js')}}"></script>
     <script type="text/javascript">
 
 			"use strict";
 
-		 $(document).ready(function(){
+		  $(document).ready(function(){
 
 				// Variables
 				var SITEURL = '{{url('')}}';
@@ -297,11 +303,52 @@
 				
 			
 				
-			});
+      });
+    function changeStatus(id){
+      $.ajax({
+        method: "POST",
+        url: "{{ route('adminusers.update_status') }}",
+        data: {_token: "{{csrf_token()}}", id: id},              
+      })
+      .done(function (res) {
+        if(res.success){
+          show_notify(res.message);
+        }
+      })
+      .fail(function (err) {
+        console.log(err);            
+      });
+    }
         
     </script>
     
-    	
+  <script>
+    function show_notify(title){
+      $.notify(
+        {
+          title:title,
+          message:''
+        },
+        {
+          type:'info',
+          newest_on_top:true ,
+          showProgressbar:false,
+          spacing:10,
+          timer:3000,
+          placement:{
+            from:'top',
+            align:'right'
+          },
+          delay:1000 ,
+          z_index:10000,
+          animate:{
+            enter:'animated flash',
+            exit:'animated flash'
+          }
+        }
+      );
+      }
+ </script>
 
   
 @endsection
