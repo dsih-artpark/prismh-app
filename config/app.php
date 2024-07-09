@@ -171,7 +171,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Ichtrojan\Otp\OtpServiceProvider::class,
         Craftsys\Msg91\Msg91LaravelServiceProvider::class,
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        // SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
         /*
@@ -182,7 +182,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        OwenIt\Auditing\AuditingServiceProvider::class,
     ],
 
     /*

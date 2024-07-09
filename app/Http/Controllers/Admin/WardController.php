@@ -3,102 +3,86 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
-
 use App\Models\Ward;
-
 use App\Models\Division;
-
-use Illuminate\Support\Facades\Hash;
-
-use Session;
-
-use Auth;
-
-use Redirect;
-
-use DataTables;
-
-use Str;
+use Illuminate\Support\Facades\Validator;
 
 class WardController extends Controller
 {
-    public function manageward()
-    {
-        $wards = Ward::where('status', 1)->get();
-        
-         
-        return view('admin.manageward', compact('wards'));
-        
-    }
-    public function addward()
-    {
-        $divisions = Division::where('status', 1)->get();
-        $data['ward'] = Ward::where('status', 1)->get();
-         
-        return view('admin.ward',  compact('data','divisions'));
-        
-    }
-     public function ward(Request $request)
-    {
-        $data['name'] = $request->name;
-        $data['number'] = $request->number;
-        $data['division_id'] = $request->division_id;
-        $data['status'] = $request->status ? "1" : "2";
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $wards = Ward::get();
+    return view('admin.ward.index', compact('wards'));
+  }
 
-        $divisionresult = DB::table('ward')->insert($data);
-        if(!empty($divisionresult))
-        {
-           return redirect()->route('adminward')->with ('succes', 'Ward added successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    $divisions = Division::get();
+    return view('admin.ward.add', compact('divisions'));
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|unique:ward,name',
+      'number' => 'required|unique:ward,number',
+      'division_id' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-    public function editward($id)
-    {
-        $ward['det'] = Ward::where('id', $id)->first();
-        $divisions = Division::where('status', 1)->get();
-        
-        return view('admin.editward', compact('ward','divisions'));
+    Ward::create(['name'=>$request->name,'number'=>$request->number, 'division_id'=>$request->division_id, 'status'=>1]);
+    return redirect()->route('admin.ward.index');
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    $ward = Ward::find($id);
+    $divisions = Division::get();
+    return view('admin.ward.edit', compact('ward','divisions'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|unique:ward,name,'.$id,
+      'number' => 'required|unique:ward,number,'.$id,
+      'division_id' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-    public function updateward(Request $request, $id)
-    {
-        
-        $ward['name'] =$request->name;
-        $ward['number'] = $request->number;
-        $ward['division_id'] = $request->division_id;
-        $ward['status'] = $request->status ? "1" : "2";
-        
-       $upded = DB::table('ward')->where('id', $id)->update($ward);
-        
-        if(!empty($upded))
-        {
-          return redirect()->route('adminward')->with ('succes', 'Ward updated successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function deleteward($id)
-    {
-        $deletd = DB::table('ward')->where('id', $id)->delete();
-        if(!empty($deletd))
-        {
-           return redirect()->route('adminward')->with ('succes', 'Ward deleted successfully');
-        }
-        
-    }
-    
+    Ward::find($id)->update(['name'=>$request->name,'number'=>$request->number, 'division_id'=>$request->division_id]);
+    return redirect()->route('admin.ward.index');
+  }
 }

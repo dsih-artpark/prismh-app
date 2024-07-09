@@ -3,103 +3,86 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
-
 use App\Models\Zone;
-
-use Illuminate\Support\Facades\Hash;
-
-use Session;
-
-use Auth;
-
-use Redirect;
-
-use DataTables;
-
-use Str;
+use Illuminate\Support\Facades\Validator;
 
 class ZoneController extends Controller
 {
-    public function managezone()
-    {
-        $zones = Zone::all();
-         
-        return view('admin.managezone', compact('zones'));
-        
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $zones = Zone::get();
+    return view('admin.zone.index', compact('zones'));
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    return view('admin.zone.add');
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'title' => 'required|unique:zone,title',
+      'latitude' => 'required',
+      'longitude' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-    public function addzone()
-    {
-         
-        return view('admin.zone');
-        
+    $data = $request->except('_token');
+    $data['status'] = 1;
+    Zone::create($data);
+    return redirect()->route('admin.zone.index');
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    $zone = Zone::find($id);
+    return view('admin.zone.edit', compact('zone'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    $validator = Validator::make($request->all(), [
+      'title' => 'required|unique:zone,title,'.$id,
+      'latitude' => 'required',
+      'longitude' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-     public function zone(Request $request)
-    {
-        $data['title'] = $request->name;
-        $data['latitude'] = $request->latitude;
-        $data['longitude'] = $request->longitude;
-        $data['status'] = $request->status ? "1" : "2";
-        
-        $zoneresult = DB::table('zone')->insert($data);
-        if(!empty($zoneresult))
-        {
-           return redirect()->route('adminzone')->with ('succes', 'Zone added successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function editzone($id)
-    {
-        $zone = Zone::where('id', $id)->first();
-        return view('admin.editzone', compact('zone'));
-    }
-    public function updatezone(Request $request, $id)
-    {
-        
-        $zone['title'] =$request->name;
-        $zone['latitude'] = $request->latitude;
-        $zone['longitude'] = $request->longitude;
-        $zone['status'] = $request->status ? "1" : "2";
-        
-       $upded = DB::table('zone')->where('id', $id)->update($zone);
-        
-        if(!empty($upded))
-        {
-          return redirect()->route('adminzone')->with ('succes', 'Zone updated successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function deletezone($id)
-    {
-        $deletd = DB::table('zone')->where('id', $id)->delete();
-        if(!empty($deletd))
-        {
-           return redirect()->route('adminzone')->with ('succes', 'Zone deleted successfully');
-        }
-        
-    }
-    public function viewzone($id)
-    {
-        $zone = DB::table('zone')->where('id', $id)->first();
-        if(!empty($zone))
-        {
-            return view('admin.viewzone', compact('zone'));
-        }
-        
-    }
+    $data = $request->except('_token', '_method');
+    Zone::find($id)->update($data);
+    return redirect()->route('admin.zone.index');
+  }
 }

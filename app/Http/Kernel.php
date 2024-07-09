@@ -66,5 +66,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'adminsession' => \App\Http\Middleware\CheckAdminSession::class,
+        'admin_auth' => \App\Http\Middleware\AdminAuthenticate::class,
+        'executive_auth' => \App\Http\Middleware\ExecutiveAuthenticate::class,
+        'field_executive_auth' => \App\Http\Middleware\FieldExecutiveAuthenticate::class,
+        'asha_worker_auth' => \App\Http\Middleware\AshaWorkerAuthenticate::class,
+        'spray_team_auth' => \App\Http\Middleware\SprayTeamAuthenticate::class,
     ];
 }

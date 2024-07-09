@@ -1,22 +1,16 @@
 <?php
   
 return [
-    
     'company' => 'ಮೆಕ್ವೇರ್ ಟೆಕ್ನಾಲಜೀಸ್',
     "copyrightservice"=>"BBMP",
     //menus
-    'menu1' => 'ವಿಬಿಎಫ್',
-    'menu2' => 'ಮುಖಪುಟ',
-    'menu3' => 'ಸದಸ್ಯರ ಮಾರ್ಗದರ್ಶಕ',
-    'menu4' => 'ಅವಕಾಶಗಳು',
-    'menu5' => 'ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ',
-    
+    'menu1' => 'ಪ್ರಿಸ್ಮ್-ಎಚ್',
     //language
     'lang' => 'ENG',
     'langid' => 'en',
     
     //project name
-    'Pojecttitle' => 'ಸಿ ಡಿ ಡಬ್ಲ್ಯೂ ಎಂ ಎಸ್',
+    'Pojecttitle' => 'ಪ್ರಿಸ್ಮ್-ಎಚ್',
     'Pojecttitlefull' => 'ಪ್ರಿಸ್ಮ್-ಎಚ್',
     
     //footer
@@ -26,126 +20,16 @@ return [
     //login page
     'title' => 'ಲಾಗಿನ್',
     'loginforgort' => 'ಸಂಕೇತ ಪದ ಮರೆತಿರಾ',
-    
-    //index page
-    'indexhead' => 'ನಮಸ್ತೆ',
-    'indexbutton1' => 'ಸದಸ್ಯನಾಗು',
-    'indexbutton2' => 'ನೋಂದಣಿಯನ್ನು ಪರಿಶೀಲಿಸಿ',
-    'indexsec1head' => 'ವಿಬಿಎಫ್ ಸುದ್ದಿ',
-    'indexsec1view' => 'ಸಂಪೂರ್ಣ ನೋಟ',
-    'indexsec2head' => 'ಸಂಪನ್ಮೂಲಗಳು',
-    'indexsec2view' => 'ಸಂಪೂರ್ಣ ನೋಟ',
-    'indexsec3head' => 'ಒಳನೋಟ',
-    'indexsec3descp' => '',
-    'indexsec4head' => 'ವಿಬಿಎಫ್',
-    'indexsec4descp'  => 'ಎಲ್ಲಾ ವ್ಯಾಪಾರ ಮಾಲೀಕರನ್ನು ವಿಪ್ರ ಬ್ಯುಸಿನೆಸ್ ಫೋರಮ್‌ನ ಭಾಗವಾಗಿರಲು ನಾವು ಸ್ವಾಗತಿಸುತ್ತೇವೆ, 
-ಇದು ವಿಪ್ರಸ್‌ನೊಂದಿಗೆ ವಿಪ್ರಸ್‌ನಿಂದ ಮತ್ತು ಪ್ರತ್ಯೇಕವಾಗಿ ವಿಪ್ರೋಗೋಸ್ಕರ ವೇದಿಕೆಯಾಗಿದೆ',
-    'indexsec4faq'  => 'ಆಗಾಗ್ಗೆ ಕೇಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳು',
-    
-    //registration page
-    'reghead' => 'ನೋಂದಣಿ',
-    'regformsubmit' => 'ಸಲ್ಲಿಸು',
-'regformchoose' => 'ಯಾವುದಾದರೂ ಒಂದನ್ನು ಆರಿಸಿ',
-'regformother' => 'ದಯವಿಟ್ಟು ಇಲ್ಲಿ ನಮೂದಿಸಿ',
-'regselect' => 'ಆಯ್ಕೆ ಮಾಡಿ' ,
-'regsearch' => 'ಹುಡುಕಲು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ',
-'language' => 'ಭಾಷೆ',
-'vehicle' => 'ವಾಹನ',
-'owner' => 'ಮಾಲೀಕರು',
-'number' => 'ಸಂಖ್ಯೆ',
-'details' => 'ವಿವರಗಳು',
-'driver' => 'ಚಾಲಕ',
-//Registration form Title
-
-'regformtitle1' => 'ಸಂಗ್ರಹಿಸು', 
-'regformtitle2' => 'ವಿಲೇವಾರಿ',
-'regformtitle3' => 'ದಾಖಲೆ ವಿವರಗಳು',
-'regformtitle4' => 'ಉಲ್ಲೇಖ ವಿವರಗಳು',
-
-// fields
-
- 
+// fields 
+'reghead' => 'ನೋಂದಣಿ',
  'regform1' => 'ಹೆಸರು', 
  'regform2' => 'ವರ್ಗ',
- 'regform3' => 'ಉಪವರ್ಗ',
  'regform4' => 'ಫೋಟೋ',
- 'regform5' => 'ಇಮೇಲ್',
  'regform6' => 'ದೂರವಾಣಿ',
-'regform7' => 'ವಿಳಾಸ',
-'regform8' => 'ವಿವರಣೆ',
-'regform9' => 'ಗುಪ್ತ ಲಿಪಿ',
-'regform10' => 'ನಗರ',
-'regform11' => 'ರಾಜ್ಯ',
-'regform12' => 'ದೇಶ',
 'regform13' => 'ಸಂಕೇತ ಪದ',
-'regform26' => 'ಆಧಾರ್',
-'regform27' => 'ಆಧಾರ್ ಚಿತ್ರ',
-'regform30' => 'ಪರವಾನಗಿ ಸಂಖ್ಯೆ',
-'regform31' => 'ಪರವಾನಗಿ ಚಿತ್ರ',
-
+'regform23' => 'ದೂರವಾಣಿ',
 'regform42' => 'OTP ನಮೂದಿಸಿ', 
 
-//Dashboard Main
-
-'dashboardhead' => ' ಅಂಕಿ ಅಂಶಗಳು',
-'dashboardtitle1' => ' ಅವಕಾಶಗಳು',
-'dashboardtitle' => 'ನೀಡಿದ', 
-'dashboardtitle2' => 'ಸ್ವೀಕರಿಸಿ',
-'dashboardtitle3' => 'ವ್ಯಾಪಾರ',
-'dashboardtitle4' => 'ಸಂಪರ್ಕಿಸಲಾಗಿದೆ',
-'dashboardtitle5' => 'ಒಟ್ಟು',
-'dashboardtitle6' => 'ಹಾಜರಾಗಿಲಾದ',
-'dashboardtitle7' => 'ಸಭೆಗಳು',
-'dashboardtitle8' => '',
-'dashboardtitle9' => 'ಹಾಜರಾಗಿದ ಸಭೆಗಳು',
-'dashboardtitle10' => 'ಸ್ವೀಕರಿಸಿದ ',
-
-'dashboardtitle14' => 'ಅವಕಾಶಗಳು','dashboardtitle13' => 'ಸ್ವೀಕರಿಸಿದ',
-//Dashboard-Apps 
-
-'dashboardappshead' => 'ಅಪ್ಲಿಕೇಶನ್ಗಳು',
-'dashboardappstitle1' => 'ಕಾರ್ಯಕ್ರಮಗಳು',
-'dashboardappstitle2' => 'ಸುದ್ದಿ',
-'dashboardappstitle3' => 'ಕ್ಯಾಲೆಂಡರ್',
-'dashboardappstitle4' => 'ಸಂಕ್ಷಿಪ್ತ ವ್ಯಕ್ತಿಚಿತ್ರ',
-'dashboardappstitle5' => 'ಚಿತ್ರಶಾಲೆ',
-'dashboardappstitle6' => 'ಸಹಾಯ',
-
-//event
-
-'eventhead' => 'ಕಾರ್ಯಕ್ರಮಗಳು',
-'eventjoin' => 'ಕಾರ್ಯಕ್ರಮ ಸೇರಿಕೊಳ್ಳಿ',
-
-//news
-
-'newshead' => 'ಸುದ್ದಿ',
-
-//calender
-
-'calenderhead' => 'ಕ್ಯಾಲೆಂಡರ್',
-
-//profile
-
-'profilehead' => 'ಸಂಕ್ಷಿಪ್ತ ವ್ಯಕ್ತಿಚಿತ್ರ',
-'profiletitle2' => 'ಪಾವತಿ ಮಾಡಿ',
-'profiletitle3' => 'ಪಾವತಿ ಇತಿಹಾಸ',
-'profiletitle4' => 'ಸದಸ್ಯತ್ವ ಮಾರ್ಗಸೂಚಿ',
-'profiletitle5' => 'ಸಂಕೇತ ಪದವನ್ನು ಬದಲಿಸಿ',
-'profiletitle6' => 'ಲಾಗ್ ಔಟ್',
-
-//gallery
-
-'galleryhead' => 'ಚಿತ್ರಶಾಲೆ',
-
-//Memebers directory
-
-'memhead' => 'ಸದಸ್ಯರ ಮಾರ್ಗದರ್ಶಕ',
-
-//Memebers Details
-
-'memdethead' => 'ಸದಸ್ಯರ ವಿವರಗಳು',
-
-"adminModule1" => "Dashboard",
 
 // Registration Page
 "Registration" => "ನೋಂದಣಿ",
@@ -161,6 +45,7 @@ return [
 "ID card" => "ಗುರುತಿನ ಚೀಟಿ",
 "Password" => "ಸಂಕೇತ ಪದ",
 "Confirm Password" => "ಪಾಸ್ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+"login_via_otp" => "OTP ಮೂಲಕ ಲಾಗಿನ್ ಮಾಡಿ",
 "Submit" => "ಸಲ್ಲಿಸು",
 
 // Forgot Password
@@ -204,7 +89,7 @@ return [
 "Flower pots"=>"ಹೂವಿನ ಕುಂಡಗಳು",
 "Tyres"=>"ಟಯರ್",
 "Other solid wastes"=>"ಇತರ ಘನತ್ಯಾಜ್ಯ",
-"List of Larva survey"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆಯ ಪಟ್ಟಿ",
+"List of Larva survey"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆ",
 "Time"=>"ಸಮಯ",
 "Date"=>"ದಿನಾಂಕ",
 "Larva Survey details"=>"ಲಾರ್ವಾ ಸಮೀಕ್ಷೆಯ ವಿವರಗಳು",
@@ -214,6 +99,37 @@ return [
 "Please Select"=>"ಆಯ್ಕೆ ಮಾಡಿ",
 "location" => "ಸ್ಥಳ",
 "Larva Survey Location"=>"ಮೂಲ ಕಡಿತದ ಸ್ಥಳ",
-"Query"=>"Query",
-
+"Query"=>"ಪ್ರಶ್ನೆ",
+"executive_login" => "Executive Login",
+"AdminModule1" => "ಡ್ಯಾಶ್ಬೋರ್ಡ್" ,
+"Asha Workers" => "ಆಶಾ ಕಾರ್ಯಕರ್ತೆಯರು",
+"History" => "ಇತಿಹಾಸ",
+"Report" => "ವರದಿಗಳು",
+"details" => "ವಿವರಗಳು",
+"List of Wards" => "ವಾರ್ಡ್‌ಗಳ ಪಟ್ಟಿ",
+"List of Survey" => "ಸಮೀಕ್ಷೆಯ ಪಟ್ಟಿ",
+"Filter Ward" => "ಫಿಲ್ಟರ್ ವಾರ್ಡ್",
+'regselect' => 'ಆಯ್ಕೆ ಮಾಡಿ' ,
+"Done" => "ಆಗಿದೆ",
+"Not Done" => "ಆಗಿಲ್ಲ",
+'profilehead' => 'ಸಂಕ್ಷಿಪ್ತ ವ್ಯಕ್ತಿಚಿತ್ರ',
+"Logout" => "ಲಾಗ್ ಔಟ್",
+"Login via password" => "ಪಾಸ್ವರ್ಡ್ ಮೂಲಕ ಲಾಗಿನ್ ಮಾಡಿ",
+"Send OTP" => "OTP  ಕಳುಹಿಸಿ",
+"This number is not registered" => "ಈ  ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನೋಂದಾಯಿಸಲಾಗಿಲ್ಲ",
+"Invalid credentials" => "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್ ತಪ್ಪಾಗಿದೆ",
+"OTP sent successfully" => "OTP ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ",
+"Your mobile number is not approved" => "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಅನುಮೋದಿಸಲಾಗಿಲ್ಲ",
+"user doesnot exist.Please register or enter correct number" => "ಬಳಕೆದಾರ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ. ದಯವಿಟ್ಟು ನೋಂದಾಯಿಸಿ ಅಥವಾ ಸರಿಯಾದ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+"This number is already registered" => "ಈ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಈಗಾಗಲೇ ನೋಂದಾಯಿಸಲಾಗಿದೆ",
+"OTP service is not available now. Please login using your password" => "OTP ಸೇವೆಯು ಈಗ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಬಳಸಿ ಲಾಗಿನ್ ಮಾಡಿ.",
+"Your OTP has expired"=>"ನಿಮ್ಮ OTP ಅವಧಿ ಮುಗಿದಿದೆ",
+"Please enter correct OTP"=>"ದಯವಿಟ್ಟು ಸರಿಯಾದ OTP ಅನ್ನು ನಮೂದಿಸಿ",
+"Incorrect OTP" => "OTP ತಪ್ಪಾಗಿದೆ",
+"your account  has been logged in successfully" => "ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಲಾಗ್ ಇನ್ ಮಾಡಲಾಗಿದೆ",
+"Password changed" => "ಪಾಸ್ವರ್ಡ್ ಬದಲಾಗಿದೆ",
+"larva survey submitted successfully" => "ಲಾರ್ವಾ ಸಮೀಕ್ಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ",
+"OTP verification" => "OTP ಪರಿಶೀಲನೆ",
+"new password"=>"ಹೊಸ ಪಾಸ್ವರ್ಡ್",
+"confirm your password"=>"ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
 ];

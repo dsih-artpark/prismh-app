@@ -22,8 +22,19 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            if (Auth::guard($guard)->check() && $guard == 'web' && in_array(Auth::guard($guard)->user()->roles,[3,4])) {
+              return redirect('executive/dashboard');
+            }
+            if (Auth::guard($guard)->check() && $guard == 'web' && in_array(Auth::guard($guard)->user()->roles,[5,6])) {
+              return redirect('field-executive/dashboard');
+            }
+            else if(Auth::guard($guard)->check() && $guard == 'admin'){
+              return redirect('admin/dashboard');
+            }
+            else if(Auth::guard($guard)->check() && $guard == 'customer' && Auth::guard($guard)->user()->roles == 1){
+              return redirect('asha-worker/dashboard');
+            }else if(Auth::guard($guard)->check()){
+              return $next($request);
             }
         }
 

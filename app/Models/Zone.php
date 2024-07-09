@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Zone extends Authenticatable
+class Zone extends Model implements Auditable
 {
-    use Notifiable;
-
+    use AuditableTrait;
     protected $table = 'zone';
-    // protected $guarded = array();
+
+    protected $fillable = ['title', 'latitude', 'longitude'];
+    
+    public $timestamps = false;
 }

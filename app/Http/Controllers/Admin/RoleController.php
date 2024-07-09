@@ -3,99 +3,85 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
-
 use App\Models\Role;
-
-use Illuminate\Support\Facades\Hash;
-
-use Session;
-
-use Auth;
-
-use Redirect;
-
-use DataTables;
-
-use Str;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
-    public function managerole()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $roles = Role::all();
-         
-        return view('admin.managerole', compact('roles'));
-        
+      $roles = Role::get();
+      return view('admin.role.index', compact('roles'));
     }
-    public function addrole()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-         
-        return view('admin.role');
-        
+      return view('admin.role.add');
     }
-     public function role(Request $request)
-    {
-        $data['name'] = $request->name;
-        $data['status'] = $request->status ? "1" : "2";
-        
-        $roleresult = DB::table('roles')->insert($data);
-        if(!empty($roleresult))
-        {
-           return redirect()->route('adminrole')->with ('succes', 'Role added successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    { 
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|unique:roles,name',
+      ]);
+      if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator->errors())->withInput();
+      }
+      Role::create(['name'=>$request->name, 'status'=>$request->status == 'on' ? 1 : 0]);
+      return redirect()->route('admin.role.index');
     }
-    public function editrole($id)
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-        $role = Role::where('id', $id)->first();
-        return view('admin.editrole', compact('role'));
+      $role = Role::find($id);
+      return view('admin.role.edit', compact('role'));
     }
-    public function updaterole(Request $request, $id)
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        
-        $role['name'] =$request->name;
-        $role['status'] = $request->status ? "1" : "2";
-        
-       $upded = DB::table('roles')->where('id', $id)->update($role);
-        
-        if(!empty($upded))
-        {
-          return redirect()->route('adminrole')->with ('succes', 'Role updated successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function deleterole($id)
-    {
-        $deletd = DB::table('roles')->where('id', $id)->delete();
-        if(!empty($deletd))
-        {
-           return redirect()->route('adminrole')->with ('succes', 'Role deleted successfully');
-        }
-        
-    }
-    public function viewrole($id)
-    {
-        $role = DB::table('roles')->where('id', $id)->first();
-        if(!empty($role))
-        {
-            return view('admin.viewrole', compact('role'));
-        }
-        
+      if ($request->ajax() || $request->wantsJson()) {
+        $role = Role::find($request->id);
+        $status = $role->status == 1 ? 0 : 1 ;
+        Role::find($request->id)->update(['status'=>$status]);
+        return response()->json(['success'=>true, 'message'=>'Status Updated Successfully']);
+      }
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|unique:roles,name,'.$id,
+			]);
+      if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator->errors())->withInput();
+      }
+      Role::find($id)->update(['name'=>$request->name, 'status'=>$request->status == 'on' ? 1 : 0]);
+      return redirect()->route('admin.role.index');
     }
 }

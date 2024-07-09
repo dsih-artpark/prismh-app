@@ -3,61 +3,28 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
-
-use App\Models\Customer;
-
-use Carbon\Carbon;
-
-use Illuminate\Support\Facades\Http;
-
-use Illuminate\Support\Facades\Hash;
-
-use Illuminate\Support\Facades\Storage;
-
 use Response;
-
-use Validator,Redirect;
-
-use App;
-
 use Illuminate\Support\Str;
-
-use Session;
-
-use Auth;
-
-use Crypt;
-
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-    public function listlocations()
-    {
-        
-        $datas = DB::table('zone')
-        ->join('division', 'zone.id', '=', 'division.zone_id' ,'left')
-        ->join('ward', 'division.id', '=', 'ward.division_id' ,'left')
-        ->where('zone.status', 1)
-        ->where('division.status', 1)
-        ->where('ward.status', 1)
-        ->get();
-         
-     
-     if($datas){
-         
+  public function listlocations(){
+    $datas = DB::table('zone')
+    ->join('division', 'zone.id', '=', 'division.zone_id' ,'left')
+    ->join('ward', 'division.id', '=', 'ward.division_id' ,'left')
+    ->where('zone.status', 1)
+    ->where('division.status', 1)
+    ->where('ward.status', 1)
+    ->get();
+    
+    if($datas){
       $gridata['CODE'] = 1;
       $gridata['CODEMESSAGE'] = 'Datas Found';
       $gridata['result'] = $datas;
       return Response::json($gridata, JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)->header('Content-Type', 'application/json');
-    }
-    else
-    {
+    }else{
       $gridata['CODE']   =   0;
       $gridata['CODEMESSAGE']    =   'Datas not found';
       $gridata['result'] = array();
@@ -65,8 +32,7 @@ class ApiController extends Controller
     }  
   }
   
-  public function listsurveys(Request $request)
-  {
+  public function listsurveys(Request $request){
     if(!$request->token)
       return response()->json(['success' => false, 'message' => 'Unauthorized.'], 401);
     $user = DB::table('api_authentication')->where(['token' => $request->token, 'type' => 'larava'])->first();
@@ -74,7 +40,7 @@ class ApiController extends Controller
       return response()->json(['success' => false, 'message' => 'Unauthorized.'], 401);
     $length = $request->length??5000;
     $datas = DB::table('pick')
-    ->select('pick.id as Id','pick.uid as Uid','customers.username as Asha worker','pick.q1 as Breeding spot','pick.waste as Container Type','pick.descp as Remarks','pick.image_data as Image','pick.source_reduction as Source Reduction','pick.source_reduction_img as Source Reduction Image','ward.name as Ward Name','pick.latit as Latitude and Longitude','pick.created_at as Date and Time')
+    ->select('pick.id as Id','pick.uid as Uid','customers.username as Asha worker','pick.q1 as Breeding spot','pick.waste as Container Type','pick.indoor as Indoor','pick.outdoor as Outdoor','pick.descp as Remarks','pick.image_data as Image','pick.source_reduction as Source Reduction','ward.name as Ward Name','ward.number as Ward Number','pick.latit as Latitude and Longitude','pick.created_at as Date and Time')
     ->join('customers', 'pick.cust_id', '=', 'customers.id' ,'left')
     ->join('ward', 'pick.ward', '=', 'ward.id' ,'left')
     ->where('pick.status', 1)
@@ -142,6 +108,4 @@ class ApiController extends Controller
       'token' => $token
     ]);
   }
-
-
 }

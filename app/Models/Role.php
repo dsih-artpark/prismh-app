@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Role extends Authenticatable
+class Role extends Model implements Auditable
 {
-    use Notifiable;
-
+    use AuditableTrait;
+  
     protected $table = 'roles';
-    // protected $guarded = array();
+
+    protected $fillable = ['name', 'status'];
+    
+    public $timestamps = false;
 }

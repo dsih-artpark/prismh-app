@@ -1,13 +1,15 @@
 <?php
 namespace App\Models;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class WastePickup extends Authenticatable
+class WastePickup extends Model
 {
-    use Notifiable;
+  protected $table = 'pick';
 
-    protected $table = 'pick';
+  protected $fillable = ['uid', 'cust_id', 'waste', 'indoor', 'outdoor', 'image_data', 'latit', 'descp', 'status',
+                         'zone','phone','division','ward','q1','source_reduction','source_reduction_img','created_at'];
+  
+  public $timestamps = false;
 }
 ?>

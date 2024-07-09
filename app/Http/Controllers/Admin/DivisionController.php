@@ -3,103 +3,91 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
-
-use App\Models\Division;
-
 use App\Models\Zone;
-
-use Illuminate\Support\Facades\Hash;
-
-use Session;
-
-use Auth;
-
-use Redirect;
-
-use DataTables;
-
-use Str;
+use App\Models\Division;
+use Illuminate\Support\Facades\Validator;
 
 class DivisionController extends Controller
 {
-    public function managedivision()
-    {
-        $divisions = Division::where('status', 1)->get();
-        
-         
-        return view('admin.managedivision', compact('divisions'));
-        
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $divisions = Division::get();
+    return view('admin.division.index', compact('divisions'));
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    $zones = Zone::get();
+    return view('admin.division.add', compact('zones'));
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|unique:division,name',
+      'latitude' => 'required',
+      'longitude' => 'required',
+      'zone_id' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-    public function adddivision()
-    {
-        $zones = Zone::where('status', 1)->get();
-         
-        return view('admin.division',  compact('zones'));
-        
+    $data = $request->except('_token');
+    $data['status'] = 1;
+    Division::create($data);
+    return redirect()->route('admin.division.index');
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    $division = Division::find($id);
+    $zones = Zone::get();
+    return view('admin.division.edit', compact('division', 'zones'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|unique:division,name,'.$id,
+      'latitude' => 'required',
+      'longitude' => 'required',
+      'zone_id' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator->errors())->withInput();
     }
-     public function division(Request $request)
-    {
-        $data['name'] = $request->name;
-        $data['latitude'] = $request->latitude;
-        $data['longitude'] = $request->longitude;
-        $data['zone_id'] = $request->zone_id;
-        $data['status'] = $request->status ? "1" : "2";
-        
-        $zoneresult = DB::table('division')->insert($data);
-        if(!empty($zoneresult))
-        {
-           return redirect()->route('admindivision')->with ('succes', 'Division added successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function editdivision($id)
-    {
-        $division['det'] = Division::where('id', $id)->first();
-        $zones = Zone::where('status', 1)->get();
-        
-        return view('admin.editdivision', compact('division','zones'));
-    }
-    public function updatedivision(Request $request, $id)
-    {
-        
-        $division['name'] =$request->name;
-        $division['latitude'] = $request->latitude;
-        $division['longitude'] = $request->longitude;
-        $division['zone_id'] = $request->zone_id;
-        $division['status'] = $request->status ? "1" : "2";
-        
-       $upded = DB::table('division')->where('id', $id)->update($division);
-        
-        if(!empty($upded))
-        {
-          return redirect()->route('admindivision')->with ('succes', 'Division updated successfully');
-        }
-        else
-        {
-            return back()->with('error','something are wrong.');
-        }
-        
-        
-    }
-    public function deletedivision($id)
-    {
-        $deletd = DB::table('division')->where('id', $id)->delete();
-        if(!empty($deletd))
-        {
-           return redirect()->route('admindivision')->with ('succes', 'Division deleted successfully');
-        }
-        
-    }
-    
+    $data = $request->except('_token', '_method');
+    Division::find($id)->update($data);
+    return redirect()->route('admin.division.index');
+  }
 }
