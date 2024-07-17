@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //Setting Service Worker Locations scope = folder | location = service worker js location
     var pwaScope = "/";
     var url = '';
-    var pwaLocation = "https://mcwaredemo.in/prismh/public/_service-worker.js";
+    // var pwaLocation = "https://mcwaredemo.in/prismh/public/_service-worker.js";
+    var pwaLocation = "http://localhost:8000/_service-worker.js";
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
